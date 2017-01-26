@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:57:06 by mgonon            #+#    #+#             */
-/*   Updated: 2017/01/25 07:56:41 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/01/26 11:10:54 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,23 @@ int		ft_itoa_base_buf(int n, int base, char *res)
 {
 	size_t	i;
 	size_t	size;
+	size_t	tmp;
 	int		sign;
 
 	if (base < 2 || base > 16 || !res)
 		return (0);
 	sign = (n < 0) ? -1 : 1;
 	size = ft_calculate_size(n, base, sign);
+	tmp = size;
 	i = 0;
 	if (sign == -1)
 		res[i++] = '-';
-	res[size] = '\0';
-	while (i < size)
+	res[tmp] = '\0';
+	while (i < tmp)
 	{
-		res[size - 1] = n % base * sign + '0';
+		res[tmp - 1] = n % base * sign + '0';
 		n /= base;
-		size--;
+		tmp--;
 	}
 	return (size);
 }

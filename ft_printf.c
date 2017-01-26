@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.c                                           :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/01/25 08:14:50 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/01/26 17:31:33 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -130,7 +130,8 @@ char	*get_result_str(const char **format, va_list args, t_format *frmt)
 			g_conv[i].handle(va_arg(args, int), buf, frmt);
 		i++;
 	}
-	printf("ICI = %s\n", buf);
+	//write(1, buf, ft_strlen(buf));
+	//printf("%s\n", buf);
 	return (NULL);
 	//get_format(frmt)
 }
@@ -231,7 +232,59 @@ int		ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf("toto %.10d", 12);
+	// ft_printf("ft_printf .10d, 12345 = %.10d\n", 12345);
+	// printf("printf 10.10d, 12345 = %.10d\n", 12345);
 	//ft_printf("toto %.10d eogiwhod %32d", 12, 24);
+
+	ft_printf("1chiffre 1 %+-10.3d chiffre 2 %+-10.3d\n", 42, -42);
+  printf("1chiffre 1 %+-10.3d chiffre 2 %+-10.3d\n", 42, -42);
+
+  ft_printf("2chiffre 1 %-10.3d chiffre 2 %-10.3d\n", 42, -42);
+  printf("2chiffre 1 %-10.3d chiffre 2 %-10.3d\n", 42, -42);
+
+ 	// ft_printf("2chiffre 1 % d chiffre 2 % d\n", 42, -42);
+  // printf("2chiffre 1 % d chiffre 2 % d\n", 42, -42);
+
+ 	// ft_printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42);
+  // printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42);
+
+ 	// ft_printf("4chiffre 1 %-012d chiffre 2 %-012d\n", 42, -42);
+  // printf("4chiffre 1 %-012d chiffre 2 %-012d\n", 42, -42);
+
+ 	// ft_printf("5chiffre 1 %010d chiffre 2 %010d\n", 42, -42);
+  // printf("5chiffre 1 %010d chiffre 2 %010d\n", 42, -42);
+
+ 	// ft_printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42);
+  // printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42);
+
+ 	// ft_printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42);
+  // printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42);
+
+ 	// ft_printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6);
+  // printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6);
+
+ 	// ft_printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6);
+  // printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6);
+
+ 	// ft_printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6);
+  // printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6);
+
+ 	// ft_printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6);
+  // printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6);
+  
+ 	// ft_printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42);
+  // printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42);  
+
+ 	// ft_printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42);
+  // printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42);
+
+ 	// ft_printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42);
+  // printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42);
+
+ 	// ft_printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42);
+  // printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42);
+
+ 	// ft_printf("16chiffre 1 %.6d chiffre 2 %.6d\n\n\n", 42, -42);
+  // printf("16chiffre 1 %.6d chiffre 2 %.6d\n", 42, -42);
 	return (0);
 }

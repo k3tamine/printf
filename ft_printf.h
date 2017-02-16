@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/01/25 07:57:32 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/02/12 10:01:10 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_format
 typedef struct	s_conv
 {
 	char	*specifier;
-	char	*(*handle)(int, char *, t_format *);
+	int		(*handle)(int, char *, t_format *);
 }				t_conv;
 
 int		is_flag(char c);
@@ -58,6 +58,6 @@ void	get_width(char const **format, t_format *frmt, va_list args);
 void	get_precision(char const **format, t_format *frmt, va_list args);
 void	get_length(char const **format, t_format *frmt);
 int		ft_itoa_base_buf(int n, int base, char *res);
-char	*handle_d(int nb, char *buf, t_format *frmt);
+int		handle_d(int nb, char *buf, t_format *frmt);
 
 #endif

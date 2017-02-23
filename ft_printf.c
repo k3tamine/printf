@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/02/12 10:01:33 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/02/16 15:57:06 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -311,99 +311,99 @@ int	main()
 	
 	int	ret;
 
-	// // test for %d 0; //
-	// printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%d 0;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
+	// test for %d 0; //
+	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%d 0;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
 
-	// printf("------------------------------------\n");
-	// ret = printf("{%d}\n", 0);
-	// printf("%35s%d\n", "printf('%d', 0) ret : ", ret);
-	// ret = ft_printf("{%d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	printf("------------------------------------\n");
+	ret = printf("{%d}\n", 0);
+	printf("%35s%d\n", "printf('%d', 0) ret : ", ret);
+	ret = ft_printf("{%d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%+d}\n", 0);
-	// printf("%35s%d\n", "printf('%+d', 0) ret : ", ret);
-	// ret = ft_printf("{%+d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%+d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%+d}\n", 0);
+	printf("%35s%d\n", "printf('%+d', 0) ret : ", ret);
+	ret = ft_printf("{%+d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%+d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%.d}\n", 0);
-	// printf("%35s%d\n", "printf('%.d', 0) ret : ", ret);
-	// ret = ft_printf("{%.d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%.d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%.d}\n", 0);
+	printf("%35s%d\n", "printf('%.d', 0) ret : ", ret);
+	ret = ft_printf("{%.d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%.d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%.5d}\n", 0);
-	// printf("%35s%d\n", "printf('%.5d', 0) ret : ", ret);
-	// ret = ft_printf("{%.5d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%.5d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%.5d}\n", 0);
+	printf("%35s%d\n", "printf('%.5d', 0) ret : ", ret);
+	ret = ft_printf("{%.5d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%.5d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%.0d}\n", 0);
-	// printf("%35s%d\n", "printf('%.0d', 0) ret : ", ret);
-	// ret = ft_printf("{%.0d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%.0d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%.0d}\n", 0);
+	printf("%35s%d\n", "printf('%.0d', 0) ret : ", ret);
+	ret = ft_printf("{%.0d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%.0d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%5.d}\n", 0);
-	// printf("%35s%d\n", "printf('%5.d', 0) ret : ", ret);
-	// ret = ft_printf("{%5.d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%5.d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%5.d}\n", 0);
+	printf("%35s%d\n", "printf('%5.d', 0) ret : ", ret);
+	ret = ft_printf("{%5.d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%5.d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%5.5d}\n", 0);
-	// printf("%35s%d\n", "printf('%5.5d', 0) ret : ", ret);
-	// ret = ft_printf("{%5.5d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%5.5d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%5.5d}\n", 0);
+	printf("%35s%d\n", "printf('%5.5d', 0) ret : ", ret);
+	ret = ft_printf("{%5.5d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%5.5d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%3.5d}\n", 0);
-	// printf("%35s%d\n", "printf('%3.5d', 0) ret : ", ret);
-	// ret = ft_printf("{%3.5d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%3.5d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%3.5d}\n", 0);
+	printf("%35s%d\n", "printf('%3.5d', 0) ret : ", ret);
+	ret = ft_printf("{%3.5d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%3.5d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%5.3d}\n", 0);
-	// printf("%35s%d\n", "printf('%5.3d', 0) ret : ", ret);
-	// ret = ft_printf("{%5.3d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%5.3d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%5.3d}\n", 0);
+	printf("%35s%d\n", "printf('%5.3d', 0) ret : ", ret);
+	ret = ft_printf("{%5.3d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%5.3d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%+010.d}\n", 0);
-	// printf("%35s%d\n", "printf('%+010.d', 0) ret : ", ret);
-	// ret = ft_printf("{%+010.d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%+010.d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%+010.d}\n", 0);
+	printf("%35s%d\n", "printf('%+010.d', 0) ret : ", ret);
+	ret = ft_printf("{%+010.d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%+010.d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%+010.5d}\n", 0);
-	// printf("%35s%d\n", "printf('% 010.5d', 0) ret : ", ret);
-	// ret = ft_printf("{%+010.5d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('% 010.5d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%+010.5d}\n", 0);
+	printf("%35s%d\n", "printf('% 010.5d', 0) ret : ", ret);
+	ret = ft_printf("{%+010.5d}\n", 0);
+	printf("%35s%d\n", "ft_printf('% 010.5d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{% .d}\n", 0);
-	// printf("%35s%d\n", "printf('% .d', 0) ret : ", ret);
-	// ret = ft_printf("{% .d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('% .d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{% .d}\n", 0);
+	printf("%35s%d\n", "printf('% .d', 0) ret : ", ret);
+	ret = ft_printf("{% .d}\n", 0);
+	printf("%35s%d\n", "ft_printf('% .d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%+.d}\n", 0);
-	// printf("%35s%d\n", "printf('%+.d', 0) ret : ", ret);
-	// ret = ft_printf("{%+.d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%+.d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%+.d}\n", 0);
+	printf("%35s%d\n", "printf('%+.d', 0) ret : ", ret);
+	ret = ft_printf("{%+.d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%+.d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%3.2d}\n", 0);
-	// printf("%35s%d\n", "printf('%3.2d', 0) ret : ", ret);
-	// ret = ft_printf("{%3.2d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%3.2d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%3.2d}\n", 0);
+	printf("%35s%d\n", "printf('%3.2d', 0) ret : ", ret);
+	ret = ft_printf("{%3.2d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%3.2d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
-	// ret = printf("{%-3.2d}\n", 0);
-	// printf("%35s%d\n", "printf('%-3.2d', 0) ret : ", ret);
-	// ret = ft_printf("{%-3.2d}\n", 0);
-	// printf("%35s%d\n", "ft_printf('%-3.2d', 0) ret : ", ret);
-	// printf("------------------------------------\n");
+	ret = printf("{%-3.2d}\n", 0);
+	printf("%35s%d\n", "printf('%-3.2d', 0) ret : ", ret);
+	ret = ft_printf("{%-3.2d}\n", 0);
+	printf("%35s%d\n", "ft_printf('%-3.2d', 0) ret : ", ret);
+	printf("------------------------------------\n");
 
 	// test for %d 1; //
 	ret = printf("{%+010.d}\n", 1);

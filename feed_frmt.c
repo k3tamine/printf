@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/01/16 04:20:05 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/01 03:30:12 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	get_precision(char const **format, t_format *frmt, va_list args)
 		(*format)++;
 		frmt->precision = va_arg(args, int);
 	}
-	// else
-	// 	frmt->precision = 0;	
+	else
+		frmt->precision = 0;	
 }
 
 void	get_length(char const **format, t_format *frmt)

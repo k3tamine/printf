@@ -6,14 +6,14 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:57:06 by mgonon            #+#    #+#             */
-/*   Updated: 2017/01/26 11:10:54 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/02 01:20:21 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #define BASE "0123456789ABCDEF"
 
-int		ft_calculate_size(int nb, int base, int sign)
+int		ft_calculate_size(long long nb, int base, int sign)
 {
 	int	size;
 
@@ -36,7 +36,7 @@ char	ft_get_char(int	nb)
 	return (BASE[i]);
 }
 
-int		ft_itoa_base_buf(int n, int base, char *res)
+int		ft_itoa_base_buf(long long n, int base, char *res)
 {
 	size_t	i;
 	size_t	size;

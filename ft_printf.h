@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/02 02:01:28 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/09 07:35:40 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,23 @@ typedef struct	s_conv
 	int		(*handle)(int, char *, t_format *);
 }				t_conv;
 
-int		is_flag(char c);
-int		is_length(char c);
-int		is_specifier(char c);
-void	init_format(t_format *frmt);
-void	get_flags(char const **format, t_format *frmt);
-void	get_width(char const **format, t_format *frmt, va_list args);
-void	get_precision(char const **format, t_format *frmt, va_list args);
-void	get_length(char const **format, t_format *frmt);
-void	get_format(char const **format, t_format *frmt, va_list args);
-int		get_result_str(const char **format, va_list args, t_format *frmt);
-int		ft_itoa_base_buf(long long n, int base, char *res);
-int		handle_di(int nb, char *buf, t_format *frmt);
-int		apply_classic(int nb, int len, char *buf, t_format *frmt);
-int		apply_width(int width, int size, int len, char c);
-int		apply_precision(int precision, int size, int nb);
-int		ft_printf(const char *format, ...);
+int			is_flag(char c);
+int			is_length(char c);
+int			is_specifier(char c);
+void		init_format(t_format *frmt);
+void		get_flags(char const **format, t_format *frmt);
+void		get_width(char const **format, t_format *frmt, va_list args);
+void		get_precision(char const **format, t_format *frmt, va_list args);
+void		get_length(char const **format, t_format *frmt);
+void		get_format(char const **format, t_format *frmt, va_list args);
+int			get_result_str(const char **format, va_list args, t_format *frmt);
+int			ft_itoa_base_buf(long long n, int base, char *res);
+int			handle_di(int nb, char *buf, t_format *frmt);
+int			ft_printf(const char *format, ...);
+int			is_signed(char c);
+int			is_unsigned(char c);
+int			is_characters(char c);
+intmax_t	get_signed_arg(va_list args, char id, t_length length);
+uintmax_t	get_unsigned_arg(va_list args, char speci, t_length length);
 
 #endif

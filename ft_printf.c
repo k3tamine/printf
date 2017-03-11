@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/02 02:01:29 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/09 09:17:56 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -68,11 +68,23 @@ void	get_format(char const **format, t_format *frmt, va_list args)
 		frmt->flags.zero = 0;
 }
 
+uintmax_t	get_arg(t_format frmt, va_list args)
+{
+	uintmax_t	arg;
+
+	if (is_signed(frmt.specifier))
+		arg = get_signed_arg(args, frmt.specifier, frmt.length);
+	else if (is_unsigned(frmt.specifier))
+		arg = get_unsigned_arg(args, frmt.specifier, frmt.length);
+	return (arg);
+}
+
 int		get_result_str(const char **format, va_list args, t_format *frmt)
 {
-	char	*buf;
-	int		len;
-	int		i;
+	char		*buf;
+	uintmax_t	arg;
+	int			len;
+	int			i;
 
 	i = 0;
 	len = 0;
@@ -82,11 +94,12 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 	ft_bzero(buf, 10000);
 	init_format(frmt);
 	get_format(format, frmt, args);
+	arg = get_arg(*frmt, args);
 	//printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
 	while (i < 1)
 	{
 		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
-			len = g_conv[i].handle(va_arg(args, int), buf, frmt);
+			len = g_conv[i].handle(arg, buf, frmt);
 		else
 			return (len);
 		i++;

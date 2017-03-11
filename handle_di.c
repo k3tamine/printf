@@ -6,13 +6,13 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 23:46:34 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/02 01:30:30 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/02 18:53:00 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	apply_precision(int precision, int size, int nb)
+static int	apply_precision(int precision, int size, int nb)
 {
 	char	buf[4096];
 	int		ret;
@@ -30,7 +30,7 @@ int	apply_precision(int precision, int size, int nb)
 	return (ret);
 }
 
-int	apply_width(int width, int size, int len, char c)
+static int	apply_width(int width, int size, int len, char c)
 {
 	char	buf[4096];
 	int		ret;
@@ -47,7 +47,7 @@ int	apply_width(int width, int size, int len, char c)
 	return (width - size);
 }
 
-int	apply_classic(int nb, int len, char *buf, t_format *frmt)
+static int	apply_classic(int nb, int len, char *buf, t_format *frmt)
 {
 	int		add_len;
 	int		i;
@@ -94,7 +94,7 @@ int	handle_di(int nb, char *buf, t_format *frmt)
 	len = 0;
 	if (nb != 0 || (frmt->width == 0 && frmt->precision == -1))
 	{
-		printf("\n\n nb = %lld\n\n", (unsigned long long)nb);
+		// printf("\n\n nb = %lld\n\n", (unsigned long long)nb);
 		if (ft_strchr("diu", frmt->specifier))
 			len = ft_itoa_base_buf(nb, 10, buf);
 		else if (ft_strchr("o", frmt->specifier))

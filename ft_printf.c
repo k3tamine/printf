@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 04:02:13 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 14:17:24 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -95,11 +95,15 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 	init_format(frmt);
 	get_format(format, frmt, args);
 	arg = get_arg(*frmt, args);
-	//printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
+	// printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
 	while (i < 1)
 	{
 		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
 			len = g_conv[i].handle(arg, buf, frmt);
+		else if (ft_strchr("s", frmt->specifier))
+			len = handle_s(va_arg(args, char *), frmt);
+		else if (ft_strchr("%", frmt->specifier))
+			len = handle_s("%", frmt);
 		else
 			return (len);
 		i++;

@@ -6,12 +6,13 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:57:06 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 04:12:40 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 13:58:05 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #define BASE "0123456789ABCDEF"
+#define BASE_LOW "0123456789abcdef"
 
 static int	ft_calculate_size(uintmax_t nb, int base)
 {
@@ -26,17 +27,20 @@ static int	ft_calculate_size(uintmax_t nb, int base)
 	return (size);
 }
 
-static char	ft_get_char(int	nb)
+static char	ft_get_char(int	nb, int b_type)
 {
 	int		i;
 
 	i = 0;
 	while (i < nb)
 		i++;
-	return (BASE[i]);
+	if (b_type)
+		return (BASE_LOW[i]);
+	else
+		return (BASE[i]);
 }
 
-int			ft_uitoa_base_buf(uintmax_t n, int base, char *res)
+int			ft_uitoa_base_buf(uintmax_t n, int base, char *res, int b_type)
 {
 	size_t	i;
 	size_t	size;
@@ -50,7 +54,7 @@ int			ft_uitoa_base_buf(uintmax_t n, int base, char *res)
 	res[tmp] = '\0';
 	while (i < tmp)
 	{
-		res[tmp - 1] = ft_get_char(n % base);
+		res[tmp - 1] = ft_get_char(n % base, b_type);
 		n /= base;
 		tmp--;
 	}

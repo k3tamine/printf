@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 OPTION = -c
 
-SRC = ft_printf.c ft_itoa_base_buf.c ft_uitoa_base_buf.c feed_frmt.c check_is.c check_is2.c handle_di.c get_args.c
+SRC = ft_printf.c ft_itoa_base_buf.c ft_uitoa_base_buf.c feed_frmt.c check_is.c check_is2.c handle_di.c get_args.c handle_s.c
 
 OBJ = $(SRC:.c=.o)
 

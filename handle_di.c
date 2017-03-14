@@ -6,13 +6,13 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 23:46:34 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 04:27:11 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 15:03:38 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	apply_precision(int precision, int size, intmax_t nb)
+int			apply_precision(int precision, int size, intmax_t nb)
 {
 	char	buf[4096];
 	int		ret;
@@ -30,7 +30,7 @@ static int	apply_precision(int precision, int size, intmax_t nb)
 	return (ret);
 }
 
-static int	apply_width(int width, int size, int len, char c)
+int			apply_width(int width, int size, int len, char c)
 {
 	char	buf[4096];
 	int		ret;
@@ -60,7 +60,7 @@ static int	apply_classic(intmax_t nb, int len, char *buf, t_format *frmt)
 		write(1, " ", 1);
 	if (!frmt->flags.zero)
 	{
-		if (!frmt->flags.plus)
+		if (!frmt->flags.plus && !frmt->flags.space)
 			add_len += frmt->flags.minus ? 0
 				: apply_width(frmt->width, frmt->precision + i, len, ' ');
 		else
@@ -71,7 +71,7 @@ static int	apply_classic(intmax_t nb, int len, char *buf, t_format *frmt)
 		write(1, "+", 1);
 	else if (nb < 0)
 		write(1, "-", 1);
-	if (nb < 0 && frmt->precision > 0 && !frmt->width)
+	if (nb < 0 && frmt->precision > 0)
 		add_len++;
 	if (frmt->flags.zero)
 		add_len += frmt->flags.minus ? apply_precision(frmt->precision, len, nb)
@@ -84,49 +84,54 @@ static int	apply_classic(intmax_t nb, int len, char *buf, t_format *frmt)
 	return (add_len);
 }
 
-int			apply_usharp(char *buf, char specifier)
+int			apply_usharp(char *buf, char specifier, int print)
 {
 	if (specifier == 'o' && buf[0] != '0')
 	{
-		write(1, "0", 1);
+		if (print)
+			write(1, "0", 1);
 		return (1);
 	}
 	else if (specifier == 'x')
 	{
-		write(1, "0x", 2);
+		if (print)
+			write(1, "0x", 2);
 		return (2);
 	}
 	else if (specifier == 'X')
 	{
-		write(1, "0X", 2);
+		if (print)
+			write(1, "0X", 2);
 		return (2);
 	}
+	return (0);
 }
 
 static int	apply_unsigned(uintmax_t nb, int len, char *buf, t_format *frmt)
 {
 	int		add_len;
-	int		i;
 
-	i = 0;
 	add_len = 0;
-	if (frmt->flags.sharp && nb != 0)
-		add_len += apply_usharp(buf, frmt->specifier);
+	if (nb != 0 && ((frmt->flags.sharp && !frmt->width) ||
+	(frmt->flags.sharp && (frmt->flags.minus || frmt->flags.zero))))
+		add_len += apply_usharp(buf, frmt->specifier, 1);
 	if (!frmt->flags.zero)
 	{
-		if (!frmt->flags.plus)
-			add_len += frmt->flags.minus ? 0
-				: apply_width(frmt->width, frmt->precision + i, len, ' ');
-		else
-			add_len += frmt->flags.minus ? 0
-				: apply_width(frmt->width - 1, frmt->precision, len, ' ');
+		if (nb != 0 && frmt->flags.sharp && !frmt->flags.minus && frmt->width)
+		{
+			frmt->width -= apply_usharp(buf, frmt->specifier, 0);
+			add_len += apply_usharp(buf, frmt->specifier, 0);
+		}
+		add_len += frmt->flags.minus ? 0
+			: apply_width(frmt->width, frmt->precision, len, ' ');
+		if (nb != 0 && frmt->flags.sharp && !frmt->flags.minus && frmt->width)
+			apply_usharp(buf, frmt->specifier, 1);
+		add_len += apply_precision(frmt->precision, len, nb);
 	}
-	if (frmt->flags.zero)
+	else
 		add_len += frmt->flags.minus ? apply_precision(frmt->precision, len, nb)
 			: apply_width(frmt->width, frmt->precision, add_len + len, '0');
-	else
-		add_len += apply_precision(frmt->precision, len, nb);
-	write(1, buf + i, len - i);
+	write(1, buf, len);
 	add_len += frmt->flags.minus ?
 		apply_width(frmt->width, add_len + len, len, ' ') : 0;
 	return (add_len);
@@ -146,11 +151,13 @@ int	handle_di(intmax_t nb, char *buf, t_format *frmt)
 		if (ft_strchr("di", frmt->specifier))
 			len = ft_itoa_base_buf(nb, 10, buf);
 		else if (ft_strchr("uU", frmt->specifier))
-			len = ft_uitoa_base_buf(nb, 10, buf);
+			len = ft_uitoa_base_buf(nb, 10, buf, 0);
 		else if (ft_strchr("o", frmt->specifier))
-			len = ft_uitoa_base_buf(nb, 8, buf);
-		else if (ft_strchr("xX", frmt->specifier))
-			len = ft_uitoa_base_buf(nb, 16, buf);
+			len = ft_uitoa_base_buf(nb, 8, buf, 0);
+		else if (ft_strchr("x", frmt->specifier))
+			len = ft_uitoa_base_buf(nb, 16, buf, 1);
+		else if (ft_strchr("X", frmt->specifier))
+			len = ft_uitoa_base_buf(nb, 16, buf, 0);
 		// printf("\nbuf = %s\n", buf);
 	}
 	else

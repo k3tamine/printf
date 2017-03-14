@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 03:08:22 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 13:53:51 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		get_length(char const **format, t_format *frmt);
 void		get_format(char const **format, t_format *frmt, va_list args);
 int			get_result_str(const char **format, va_list args, t_format *frmt);
 int			ft_itoa_base_buf(intmax_t n, int base, char *res);
-int			ft_uitoa_base_buf(uintmax_t n, int base, char *res);
+int			ft_uitoa_base_buf(uintmax_t n, int base, char *res, int b_type);
 int			handle_di(intmax_t nb, char *buf, t_format *frmt);
 int			ft_printf(const char *format, ...);
 int			is_signed(char c);
@@ -69,5 +69,8 @@ int			is_unsigned(char c);
 int			is_characters(char c);
 intmax_t	get_signed_arg(va_list args, char id, t_length length);
 uintmax_t	get_unsigned_arg(va_list args, char speci, t_length length);
+int			apply_precision(int precision, int size, intmax_t nb);
+int			apply_width(int width, int size, int len, char c);
+int			handle_s(char *str, t_format *frmt);
 
 #endif

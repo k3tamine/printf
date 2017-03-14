@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/09 07:35:40 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 03:08:22 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_format
 typedef struct	s_conv
 {
 	char	*specifier;
-	int		(*handle)(int, char *, t_format *);
+	int		(*handle)(intmax_t, char *, t_format *);
 }				t_conv;
 
 int			is_flag(char c);
@@ -60,8 +60,9 @@ void		get_precision(char const **format, t_format *frmt, va_list args);
 void		get_length(char const **format, t_format *frmt);
 void		get_format(char const **format, t_format *frmt, va_list args);
 int			get_result_str(const char **format, va_list args, t_format *frmt);
-int			ft_itoa_base_buf(long long n, int base, char *res);
-int			handle_di(int nb, char *buf, t_format *frmt);
+int			ft_itoa_base_buf(intmax_t n, int base, char *res);
+int			ft_uitoa_base_buf(uintmax_t n, int base, char *res);
+int			handle_di(intmax_t nb, char *buf, t_format *frmt);
 int			ft_printf(const char *format, ...);
 int			is_signed(char c);
 int			is_unsigned(char c);

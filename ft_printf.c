@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/09 09:17:56 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/14 04:02:13 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -22,7 +22,7 @@
 };*/
 
 static const t_conv g_conv[] = {
-	{ "dioxX", handle_di }
+	{ "diuUoOxX", handle_di }
 	//{ "%", toto_limit}
 };
 
@@ -68,9 +68,9 @@ void	get_format(char const **format, t_format *frmt, va_list args)
 		frmt->flags.zero = 0;
 }
 
-uintmax_t	get_arg(t_format frmt, va_list args)
+intmax_t	get_arg(t_format frmt, va_list args)
 {
-	uintmax_t	arg;
+	intmax_t	arg;
 
 	if (is_signed(frmt.specifier))
 		arg = get_signed_arg(args, frmt.specifier, frmt.length);
@@ -104,10 +104,8 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 			return (len);
 		i++;
 	}
-	//write(1, buf, ft_strlen(buf));
-	//printf("%s\n", buf);
+	free(buf);
 	return (len);
-	//get_format(frmt)
 }
 
 int		ft_printf(const char *format, ...)
@@ -131,8 +129,11 @@ int		ft_printf(const char *format, ...)
 			// printf("\n len main2 = %d\n", len);
 			//len +=
 			start = (char *)format;
-			format++;
-			len++;
+			// if (*format != '\0')
+			// {
+			// 	format++;
+			// 	len++;
+			// }
 		}
 		else if (*format != '\0')
 		{

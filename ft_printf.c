@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 14:17:24 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/15 21:22:41 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -104,6 +104,8 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 			len = handle_s(va_arg(args, char *), frmt);
 		else if (ft_strchr("%", frmt->specifier))
 			len = handle_s("%", frmt);
+		else if (ft_strchr("c", frmt->specifier))
+			len = handle_c(va_arg(args, char), frmt);
 		else
 			return (len);
 		i++;

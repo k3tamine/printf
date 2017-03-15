@@ -2,10 +2,12 @@
 
 int	handle_s(char *str, t_format *frmt)
 {
-	int		add_len;
-	int		len;
+	int	add_len;
+	int	len;
 
 	add_len = 0;
+	if (!str)
+		str = "(null)";
 	len = ft_strlen(str);
 	if (frmt->specifier == '%' && frmt->precision == 0)
 		frmt->precision = 1;
@@ -27,4 +29,24 @@ int	handle_s(char *str, t_format *frmt)
 			add_len += apply_width(frmt->width, len, 0, ' ');
 	}
 	return (add_len);
+}
+
+int	handle_c(char c, t_format *frmt)
+{
+	char	*str;
+	int		len;
+
+	len = 0;
+	if (c == 0)
+	{
+		len++;
+		if (frmt->width > 0)
+			frmt->width--;
+	}
+	str = (char *)malloc(sizeof(*str) * 2);
+	str[0] = c;
+	str[1] = '\0';
+	len += handle_s(str, frmt);
+	free(str);
+	return (len);
 }

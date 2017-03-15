@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 23:46:34 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 15:03:38 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/15 21:22:39 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int	apply_unsigned(uintmax_t nb, int len, char *buf, t_format *frmt)
 	int		add_len;
 
 	add_len = 0;
-	if (nb != 0 && ((frmt->flags.sharp && !frmt->width) ||
+	if ((nb != 0 || frmt->specifier == 'o') && ((frmt->flags.sharp && !frmt->width) ||
 	(frmt->flags.sharp && (frmt->flags.minus || frmt->flags.zero))))
 		add_len += apply_usharp(buf, frmt->specifier, 1);
 	if (!frmt->flags.zero)
@@ -137,7 +137,7 @@ static int	apply_unsigned(uintmax_t nb, int len, char *buf, t_format *frmt)
 	return (add_len);
 }
 
-int	handle_di(intmax_t nb, char *buf, t_format *frmt)
+int			handle_di(intmax_t nb, char *buf, t_format *frmt)
 {
 	int		i;
 	int		len;
@@ -147,7 +147,6 @@ int	handle_di(intmax_t nb, char *buf, t_format *frmt)
 	len = 0;
 	if (nb != 0 || (frmt->width == 0 && frmt->precision == -1))
 	{
-		// printf("\n\n nb = %lld\n\n", (unsigned long long)nb);
 		if (ft_strchr("di", frmt->specifier))
 			len = ft_itoa_base_buf(nb, 10, buf);
 		else if (ft_strchr("uU", frmt->specifier))
@@ -158,7 +157,6 @@ int	handle_di(intmax_t nb, char *buf, t_format *frmt)
 			len = ft_uitoa_base_buf(nb, 16, buf, 1);
 		else if (ft_strchr("X", frmt->specifier))
 			len = ft_uitoa_base_buf(nb, 16, buf, 0);
-		// printf("\nbuf = %s\n", buf);
 	}
 	else
 		buf[0] = '\0';

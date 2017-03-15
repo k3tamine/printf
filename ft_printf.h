@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 13:53:51 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/15 21:22:42 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ uintmax_t	get_unsigned_arg(va_list args, char speci, t_length length);
 int			apply_precision(int precision, int size, intmax_t nb);
 int			apply_width(int width, int size, int len, char c);
 int			handle_s(char *str, t_format *frmt);
+int			handle_c(char c, t_format *frmt);
 
 #endif

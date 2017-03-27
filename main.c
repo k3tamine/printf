@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/03/15 20:00:25 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/23 07:23:42 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int		main(int ac, char **av)
 {
 	int	ret;
+	int	toto;
 
 	// printf("@moulitest: %10s\n", NULL);
 	// ft_printf("@moulitest: %10s\n", NULL);
@@ -23,12 +24,20 @@ int		main(int ac, char **av)
 	// printf("ret = %D\n\n", ft_printf("%03.2D\n", -1L));
 	// printf("ret = %D\n\n", printf("%03.2ld\n", -1L));
 
-	printf("ret = %D\n\n", ft_printf("@moulitest: %#.o %#.0o\n", 0, 0));
-	printf("ret = %D\n\n", printf("@moulitest: %#.o %#.0o\n", 0, 0));
+	// printf("ret = %D\n\n", ft_printf("@moulitest: %#.o %#.0o\n", 0, 0));
+	// printf("ret = %D\n\n", printf("@moulitest: %#.o %#.0o\n", 0, 0));
 
-	printf("ret = %d\n\n", ft_printf("{%12c}\n", 0));
-	printf("ret = %d\n\n", printf("{%12c}\n", 0));
+	// printf("ret = %d\n\n", ft_printf("%#O\n", 1));
+	// printf("ret = %d\n\n", printf("%#O\n", 1));
 
+	// printf("ret = %d\n\n", ft_printf("%C", 'ÁM-^L´'));
+	// printf("ret = %d\n\n", printf("%C", 'ÁM-^L´'));
+	
+	// printf("ret = %d\n\n", ft_printf("%p\n", &ret));
+	// printf("ret = %d\n\n", printf("%p\n", &ret));
+
+	// printf("ret = %d\n\n", ft_printf("%C", 'ÁM-^L´'));
+	// printf("ret = %d\n\n", printf("%C", 'ÁM-^L´'));
 
 	// test for %d 0; //
 	// printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%d 0;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");

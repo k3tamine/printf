@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/15 21:22:41 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/16 13:09:35 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -22,7 +22,7 @@
 };*/
 
 static const t_conv g_conv[] = {
-	{ "diuUoOxX", handle_di }
+	{ "dDiuUoOxXp", handle_di }
 	//{ "%", toto_limit}
 };
 
@@ -63,7 +63,7 @@ void	get_format(char const **format, t_format *frmt, va_list args)
 		(*format)++;
 	}
 	else
-		printf("**format = %c, why no specifier ?!\n", **format);
+		frmt->specifier = '\0';
 	if (frmt->precision >= 0 && frmt->flags.zero)
 		frmt->flags.zero = 0;
 }
@@ -105,7 +105,9 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 		else if (ft_strchr("%", frmt->specifier))
 			len = handle_s("%", frmt);
 		else if (ft_strchr("c", frmt->specifier))
-			len = handle_c(va_arg(args, char), frmt);
+			len = handle_c(va_arg(args, int), frmt);
+		else if (ft_strchr("C", frmt->specifier))
+			len = handle_c((wint_t)va_arg(args, wint_t), frmt);
 		else
 			return (len);
 		i++;

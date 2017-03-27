@@ -6,17 +6,18 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/15 21:22:42 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/16 13:10:42 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "libft/libft.h"
+# include <stdarg.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <wchar.h>
+# include "libft/libft.h"
 
 typedef struct		s_flags
 {

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:57:06 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 13:58:05 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/23 07:23:16 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			ft_uitoa_base_buf(uintmax_t n, int base, char *res, int b_type)
 	if (base < 2 || base > 16 || !res)
 		return (0);
 	size = ft_calculate_size(n, base);
+	// printf("\nsize = %d\n", size);
 	tmp = size;
 	i = 0;
 	res[tmp] = '\0';

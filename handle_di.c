@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 23:46:34 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/15 21:22:39 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/16 12:56:36 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,17 @@ int			handle_di(intmax_t nb, char *buf, t_format *frmt)
 	len = 0;
 	if (nb != 0 || (frmt->width == 0 && frmt->precision == -1))
 	{
-		if (ft_strchr("di", frmt->specifier))
+		if (ft_strchr("diD", frmt->specifier))
 			len = ft_itoa_base_buf(nb, 10, buf);
 		else if (ft_strchr("uU", frmt->specifier))
 			len = ft_uitoa_base_buf(nb, 10, buf, 0);
-		else if (ft_strchr("o", frmt->specifier))
+		else if (ft_strchr("oO", frmt->specifier))
 			len = ft_uitoa_base_buf(nb, 8, buf, 0);
-		else if (ft_strchr("x", frmt->specifier))
+		else if (ft_strchr("xp", frmt->specifier))
 			len = ft_uitoa_base_buf(nb, 16, buf, 1);
 		else if (ft_strchr("X", frmt->specifier))
 			len = ft_uitoa_base_buf(nb, 16, buf, 0);
+		// printf("\n buf = %s\n", buf);
 	}
 	else
 		buf[0] = '\0';

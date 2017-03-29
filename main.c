@@ -6,12 +6,15 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/03/23 07:23:42 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/03/29 03:39:31 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
+//https://www.ibisc.univ-evry.fr/~petit/Enseignement/Modelisation-en-C/printf-conversions-format.pdf
+//https://forum.intra.42.fr/topics/15759/messages/1#57314
 
 int		main(int ac, char **av)
 {

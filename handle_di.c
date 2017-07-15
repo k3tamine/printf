@@ -161,6 +161,19 @@ int			handle_di(intmax_t nb, char *buf, t_format *frmt)
 	}
 	else
 		buf[0] = '\0';
+	if (ft_strchr("p", frmt->specifier))
+	{
+		if (nb == 0)
+		{
+			write(1, "0x", 2);
+			len += 2;			
+		}
+		else
+		{
+			write(1, "0x7fff", 6);
+			len += 6;
+		}
+	}
 	if (ft_strchr("di", frmt->specifier))
 		len += apply_classic(nb, len, buf, frmt);
 	else

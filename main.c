@@ -21,6 +21,35 @@ int		main(int ac, char **av)
 	int	ret;
 	int	toto;
 
+	// int test;
+	// int test2;
+	// int test3;
+	// int test4;
+	// int test5;
+	// int test6;
+	// int test7;
+	int test_simple_mix;
+
+	// printf("ret = %D\n\n", printf("test %p\n", &ret));
+	printf("ret = %D\n\n", ft_printf("{%-15Z}", 123));
+	printf("ret = %D\n\n", printf("{%-15Z}", 123));
+	
+	// printf("ret = %D\n\n", printf("%\n", 0));
+	// printf("ret = %D\n\n", ft_printf("%\n", 0));
+
+	// printf("ret = %D\n\n", printf("s: %s, p: %p, d:%d\n", "a string", &test_simple_mix, 42));
+	// printf("ret = %D\n\n", ft_printf("s: %s, p: %p, d:%d\n", "a string", &test_simple_mix, 42));
+
+
+	// printf("ret = %D\n\n", printf("%p\n", &test));
+	// printf("ret = %D\n\n", printf("%p\n", &test2));
+	// printf("ret = %D\n\n", printf("%p\n", &test3));
+	// printf("ret = %D\n\n", printf("%p\n", &test4));
+	// printf("ret = %D\n\n", printf("%p\n", &test5));
+	// printf("ret = %D\n\n", printf("%p\n", &test6));
+	// printf("ret = %D\n\n", printf("%p\n", &test7));
+
+	
 	// printf("@moulitest: %10s\n", NULL);
 	// ft_printf("@moulitest: %10s\n", NULL);
 

@@ -63,7 +63,8 @@ void	get_format(char const **format, t_format *frmt, va_list args)
 		(*format)++;
 	}
 	else
-		frmt->specifier = '\0';
+		// frmt->specifier = '\0';
+		frmt->specifier = 'z';
 	if (frmt->precision >= 0 && frmt->flags.zero)
 		frmt->flags.zero = 0;
 }
@@ -94,10 +95,11 @@ int		get_result_str(const char **format, va_list args, t_format *frmt)
 	ft_bzero(buf, 10000);
 	init_format(frmt);
 	get_format(format, frmt, args);
-	arg = get_arg(*frmt, args);
+	arg = get_arg(*frmt, args);	
 	// printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
 	while (i < 1)
 	{
+		// printf("specifier = %c\n", frmt->specifier);
 		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
 			len = g_conv[i].handle(arg, buf, frmt);
 		else if (ft_strchr("s", frmt->specifier))

@@ -9,6 +9,11 @@ int	handle_s(char *str, t_format *frmt)
 	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);
+	// if (str[0] == '\0')
+	// {
+	// 	len++;
+	// 	add_len--;
+	// }
 	if (frmt->specifier == '%' && frmt->precision == 0)
 		frmt->precision = 1;
 	if (frmt->width && !frmt->flags.minus)

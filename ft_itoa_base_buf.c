@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 20:57:06 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/14 02:56:13 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/27 14:32:35 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static int	ft_calculate_size(intmax_t nb, int base, int sign)
 	return (sign < 0) ? size + 1 : size;
 }
 
-static char	ft_get_char(int	nb)
-{
-	int		i;
+// static char	ft_get_char(int	nb)
+// {
+// 	int		i;
 
-	i = 0;
-	while (i < nb)
-		i++;
-	return (BASE[i]);
-}
+// 	i = 0;
+// 	while (i < nb)
+// 		i++;
+// 	return (BASE[i]);
+// }
 
 int			ft_itoa_base_buf(intmax_t n, int base, char *res)
 {

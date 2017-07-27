@@ -6,25 +6,108 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/16 13:09:35 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/27 13:46:00 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
 
-/*static const t_conv g_conv[] = {
-	{ "bdiouxX", int_arg },
-	{ "DOU", dou_arg },
-	{ "Cc", c_arg },
-	{ "s", s_arg },
-	{ "S", ws_arg },
-	{ "p", p_arg },
-	{ "%", pct_arg }
-};*/
+#include "ft_printf.h"
 
 static const t_conv g_conv[] = {
 	{ "dDiuUoOxXp", handle_di }
 	//{ "%", toto_limit}
 };
+
+intmax_t	get_arg(t_format frmt, va_list args)
+{
+	intmax_t	arg;
+
+	if (is_signed(frmt.specifier))
+		arg = get_signed_arg(args, frmt.specifier, frmt.length);
+	else if (is_unsigned(frmt.specifier))
+		arg = get_unsigned_arg(args, frmt.specifier, frmt.length);
+	return (arg);
+}
+
+// int		get_result_str(const char **format, va_list args, t_format *frmt)
+// {
+// 	char		*buf;
+// 	uintmax_t	arg;
+// 	int			len;
+// 	int			i;
+
+// 	i = 0;
+// 	len = 0;
+// 	// buf = ft_memalloc(10000);
+// 	if(!(buf = (char *)malloc(sizeof(*buf) * 10000)))
+// 		return (0);
+// 	ft_bzero(buf, 10000);
+// 	init_format(frmt);
+// 	get_format(format, frmt, args);
+// 	arg = get_arg(*frmt, args);	
+// 	// printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
+// 	while (i < 1)
+// 	{
+// 		// printf("specifier = %c\n", frmt->specifier);
+// 		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
+// 			len = g_conv[i].handle(arg, buf, frmt);
+// 		else if (ft_strchr("s", frmt->specifier))
+// 			len = handle_s(va_arg(args, char *), frmt);
+// 		else if (ft_strchr("%", frmt->specifier))
+// 			len = handle_s("%", frmt);
+// 		// else if (ft_strchr("z", frmt->specifier))
+// 		// 	len = handle_s("\0", frmt);
+// 		else if (ft_strchr("c", frmt->specifier))
+// 			len = handle_c(va_arg(args, int), frmt);
+// 		else if (ft_strchr("C", frmt->specifier))
+// 			len = handle_c((wint_t)va_arg(args, wint_t), frmt);
+// 		else
+// 			return (len);
+// 		i++;
+// 	}
+// 	free(buf);
+// 	return (len);
+// }
+
+static void	apply_width(char **data, int *size, t_format frmt)
+{
+	int		width;
+	char	*to_add;
+	char	*tmp;
+
+	width = frmt.width;
+	if (width > *size)
+	{
+		tmp = *data;
+		if (frmt.flags.zero == 0 || frmt.flags.minus == 1)
+			to_add = ft_strnew_c(width - *size, ' ');
+		else
+			to_add = ft_strnew_c(width - *size, '0');
+		if (to_add == NULL)
+			return ;
+		if (frmt.flags.minus)
+			*data = ft_strjoin(*data, to_add);
+		else
+			*data = ft_strjoin(to_add, *data);
+		*size = width;
+		free(tmp);
+		free(to_add);
+	}
+}
+
+void		ftpf_process_data(char **data, int *size, t_specifiers specifiers)
+{
+	if (ftpf_is_unsigned_conv(specifiers.identifier))
+		ftpf_process_unsigned(data, size, specifiers);
+	else if (ftpf_is_signed_conv(specifiers.identifier))
+		ftpf_process_signed(data, size, specifiers);
+	else if (ftpf_is_characters_conv(specifiers.identifier))
+		ftpf_process_characters(data, size, specifiers);
+	else
+	{
+		if (specifiers.width > 0)
+			apply_width(data, size, specifiers);
+	}
+}
 
 void	init_format(t_format *frmt)
 {
@@ -69,92 +152,59 @@ void	get_format(char const **format, t_format *frmt, va_list args)
 		frmt->flags.zero = 0;
 }
 
-intmax_t	get_arg(t_format frmt, va_list args)
+int		get_result_str(const char **format, va_list args, int *tmp_len, int full_len)
 {
-	intmax_t	arg;
+	t_format	frmt;
+	char		*res_str;
 
-	if (is_signed(frmt.specifier))
-		arg = get_signed_arg(args, frmt.specifier, frmt.length);
-	else if (is_unsigned(frmt.specifier))
-		arg = get_unsigned_arg(args, frmt.specifier, frmt.length);
-	return (arg);
+	init_format(&frmt);
+	get_format(format, &frmt, args);
+	res_str = get_str(frmt, args, tmp_len, full_len);
+	if (res_str)
+		fill_str(&res_str, tmp_len, full_len);
+	return (res_str);
+
 }
 
-int		get_result_str(const char **format, va_list args, t_format *frmt)
+int		put_n_str(char *str)
 {
-	char		*buf;
-	uintmax_t	arg;
-	int			len;
-	int			i;
+	int	i;
 
 	i = 0;
-	len = 0;
-	// buf = ft_memalloc(10000);
-	if(!(buf = (char *)malloc(sizeof(*buf) * 10000)))
-		return (0);
-	ft_bzero(buf, 10000);
-	init_format(frmt);
-	get_format(format, frmt, args);
-	arg = get_arg(*frmt, args);	
-	// printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
-	while (i < 1)
-	{
-		// printf("specifier = %c\n", frmt->specifier);
-		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
-			len = g_conv[i].handle(arg, buf, frmt);
-		else if (ft_strchr("s", frmt->specifier))
-			len = handle_s(va_arg(args, char *), frmt);
-		else if (ft_strchr("%", frmt->specifier))
-			len = handle_s("%", frmt);
-		else if (ft_strchr("c", frmt->specifier))
-			len = handle_c(va_arg(args, int), frmt);
-		else if (ft_strchr("C", frmt->specifier))
-			len = handle_c((wint_t)va_arg(args, wint_t), frmt);
-		else
-			return (len);
+	while (str[i] && str[i] != '%')
 		i++;
-	}
-	free(buf);
-	return (len);
+	write(1, str, i);
+	return (i);
 }
 
 int		ft_printf(const char *format, ...)
 {
-	int			len;
-	char		*start;
-	t_format	frmt;
+	int			full_len;
+	int			tmp_len;
+	char		*res_str;
 	va_list		args;
 
 	len = 0;
 	va_start(args, format);
-	start = (char *)format;
-	while (*format != '\0')
+	while (*format)
 	{
-		if (*format == '%')
+		if (*format != '%')
+			ft_putchar(*format++);
+			// format += put_n_str(format);
+		else
 		{
-			write(1, start, format - start);
 			format++;
-			// printf("\n len main = %d\n", len);
-			len += get_result_str(&format, args, &frmt);
-			// printf("\n len main2 = %d\n", len);
-			//len +=
-			start = (char *)format;
-			// if (*format != '\0')
-			// {
-			// 	format++;
-			// 	len++;
-			// }
+			if (!(res_str = get_result_str(&format, args, &tmp_len, full_len)))
+				return (-1);
+			write(1, res_str, tmp_size);
+			full_len += size - 1;
+			free(res_str);
 		}
-		else if (*format != '\0')
-		{
-			len++;
-			format++;
-		}
+		full_len++;
 	}
-	write(1, start, format - start);
-	// printf("\n len main3 = %d\n", len);
+	// printf("\n full_len main3 = %d\n", full_len);
 	va_end(args);
-	return (len);
+	return (full_len);
 }
 
 

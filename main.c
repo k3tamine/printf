@@ -31,9 +31,11 @@ int		main(int ac, char **av)
 	int test_simple_mix;
 
 	// printf("ret = %D\n\n", printf("test %p\n", &ret));
-	printf("ret = %D\n\n", ft_printf("{%-15Z}", 123));
-	printf("ret = %D\n\n", printf("{%-15Z}", 123));
+	// printf("ret = %D\n\n", ft_printf("{%15ZPK}", 123));
+	// printf("ret = %D\n\n", printf("{%15ZPK}", 123));
 	
+	printf("ret = %D\n\n", ft_printf("{%3c}\n", 0));
+	printf("ret = %D\n\n", printf("{%3c}\n", 0));
 	// printf("ret = %D\n\n", printf("%\n", 0));
 	// printf("ret = %D\n\n", ft_printf("%\n", 0));
 

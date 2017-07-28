@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:24:59 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 06:49:33 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 08:32:05 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static void	apply_sharp_flag(char **res_str, int *tmp_len, char id)
 	{
 		if (**res_str == '0')
 			return ;
-		*res_str = ft_strjoin("0", *res_str);
+		*res_str = ft_strjoin("0", tmp);
 		*tmp_len += 1;
 		free(tmp);
 	}
 	else if (id == 'x' || id == 'X' || id == 'p')
 	{
-		*res_str = ft_strjoin("0x", *res_str);
+		*res_str = ft_strjoin("0x", tmp);
 		*tmp_len += 2;
 		free(tmp);
 	}
@@ -101,7 +101,7 @@ static void	apply_width_nominus(char **res_str, int *tmp_len, t_format frmt)
 	}
 	else
 		to_add = ft_strnew_c(width - *tmp_len, '0');
-	*res_str = ft_strjoin(to_add, *res_str);
+	*res_str = ft_strjoin(to_add, tmp);
 	*tmp_len = width;
 	free(tmp);
 	free(to_add);

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 07:53:25 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 08:08:58 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,6 @@ char	*uintmaxtoa_base(unsigned long long value, int base)
 	char				*res;
 	unsigned long long	nb;
 	int					i;
-
-	// printf("arg = %llx\n\n", value);
-	// printf("arg = %llu\n\n", value);
 
 	if (base < 2 || base > 16)
 		return (NULL);

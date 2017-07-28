@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 01:51:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 07:53:49 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 08:09:25 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static unsigned long long	get_unsigned_arg(va_list args, char specifier, t_lengt
 		arg = (unsigned long long)(unsigned short)va_arg(args, unsigned int);
 	else
 		arg = (unsigned long long)va_arg(args, unsigned int);
+	uintmaxtoa_base(arg, 16);
 	return (arg);
 }
 

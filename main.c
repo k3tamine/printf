@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/07/28 07:56:21 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 08:40:04 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int		main(int ac, char **av)
 	// printf("ret = %D\n\n", printf("test %p\n", &ret));
 	// printf("ret = %D\n\n", ft_printf("{%15ZPK}", 123));
 	// printf("ret = %D\n\n", printf("{%15ZPK}", 123));
-	
-	printf("ret = %D\n\n", ft_printf("{% 10.5d}\n", 4242));
-	printf("ret = %D\n\n", printf("{% 10.5d}\n", 4242));
+	printf("ret = %D\n\n", ft_printf("{%0+5d\n}", -42));
+	printf("ret = %D\n\n", printf("{%0+5d\n}", -42));
 	// printf("itoa = %lld\n", intmaxtoa_base(-9223372036854775808, 10));
 	// printf("ret = %D\n\n", printf("%\n", 0));
 	// printf("ret = %D\n\n", ft_printf("%\n", 0));

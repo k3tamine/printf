@@ -6,13 +6,19 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/27 14:39:13 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 03:24:02 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# define IS_FLAG 1
+# define IS_LENGTH 2
+# define IS_SPECIFIER 3
+# define IS_UNSIGNED 4
+# define IS_SIGNED 5
+# define IS_CHARACTERS 6
 # include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -51,12 +57,11 @@ typedef struct		s_conv
 	int		(*handle)(intmax_t, char *, t_format *);
 }					t_conv;
 
-int	is_characters(char c);
-int	is_signed(char c);
-int	is_unsigned(char c);
-int	is_flag(char c);
-int	is_length(char c);
-int	is_specifier(char c);
-int	get_base(char specifier);
+void	fill_format(char const **format, t_format *frmt, va_list args);
+int		check_is(char c);
+int		get_base(char specifier);
+void	init_format(t_format *frmt);
+char	*ft_sign_itoa_base(intmax_t value, int base);
+char	*ft_usign_itoa_base(uintmax_t value, int base);
 
 #endif

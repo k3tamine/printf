@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 23:57:45 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/27 13:37:48 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 02:07:41 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *str, char c);
 char			*ft_itoa(int n);
+char			*ft_itoa_base(int value, int base);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
 void			ft_putendl(char const *s);

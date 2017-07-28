@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/27 13:46:00 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 02:53:58 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,52 +21,12 @@ intmax_t	get_arg(t_format frmt, va_list args)
 {
 	intmax_t	arg;
 
-	if (is_signed(frmt.specifier))
+	if (check_is(frmt.specifier) == IS_SIGNED)
 		arg = get_signed_arg(args, frmt.specifier, frmt.length);
-	else if (is_unsigned(frmt.specifier))
+	else if (check_is(frmt.specifier) == IS_SIGNED)
 		arg = get_unsigned_arg(args, frmt.specifier, frmt.length);
 	return (arg);
 }
-
-// int		get_result_str(const char **format, va_list args, t_format *frmt)
-// {
-// 	char		*buf;
-// 	uintmax_t	arg;
-// 	int			len;
-// 	int			i;
-
-// 	i = 0;
-// 	len = 0;
-// 	// buf = ft_memalloc(10000);
-// 	if(!(buf = (char *)malloc(sizeof(*buf) * 10000)))
-// 		return (0);
-// 	ft_bzero(buf, 10000);
-// 	init_format(frmt);
-// 	get_format(format, frmt, args);
-// 	arg = get_arg(*frmt, args);	
-// 	// printf("width = %d\n z = %d\n specifier = %c\n", frmt->width, frmt->length.z, frmt->specifier);
-// 	while (i < 1)
-// 	{
-// 		// printf("specifier = %c\n", frmt->specifier);
-// 		if (ft_strchr(g_conv[i].specifier, frmt->specifier))
-// 			len = g_conv[i].handle(arg, buf, frmt);
-// 		else if (ft_strchr("s", frmt->specifier))
-// 			len = handle_s(va_arg(args, char *), frmt);
-// 		else if (ft_strchr("%", frmt->specifier))
-// 			len = handle_s("%", frmt);
-// 		// else if (ft_strchr("z", frmt->specifier))
-// 		// 	len = handle_s("\0", frmt);
-// 		else if (ft_strchr("c", frmt->specifier))
-// 			len = handle_c(va_arg(args, int), frmt);
-// 		else if (ft_strchr("C", frmt->specifier))
-// 			len = handle_c((wint_t)va_arg(args, wint_t), frmt);
-// 		else
-// 			return (len);
-// 		i++;
-// 	}
-// 	free(buf);
-// 	return (len);
-// }
 
 static void	apply_width(char **data, int *size, t_format frmt)
 {
@@ -94,72 +54,29 @@ static void	apply_width(char **data, int *size, t_format frmt)
 	}
 }
 
-void		ftpf_process_data(char **data, int *size, t_specifiers specifiers)
-{
-	if (ftpf_is_unsigned_conv(specifiers.identifier))
-		ftpf_process_unsigned(data, size, specifiers);
-	else if (ftpf_is_signed_conv(specifiers.identifier))
-		ftpf_process_signed(data, size, specifiers);
-	else if (ftpf_is_characters_conv(specifiers.identifier))
-		ftpf_process_characters(data, size, specifiers);
-	else
-	{
-		if (specifiers.width > 0)
-			apply_width(data, size, specifiers);
-	}
-}
+// void		ftpf_process_data(char **data, int *size, t_format frmt)
+// {
+// 	if (ftpf_is_unsigned_conv(frmt.specifier))
+// 		ftpf_process_unsigned(data, size, frmt);
+// 	else if (ftpf_is_signed_conv(frmt.specifier))
+// 		ftpf_process_signed(data, size, frmt);
+// 	else if (ftpf_is_characters_conv(frmt.specifier))
+// 		ftpf_process_characters(data, size, frmt);
+// 	else
+// 	{
+// 		if (frmt.width > 0)
+// 			apply_width(data, size, frmt);
+// 	}
+// }
 
-void	init_format(t_format *frmt)
-{
-	frmt->flags.minus = 0;
-	frmt->flags.plus = 0;
-	frmt->flags.space = 0;
-	frmt->flags.sharp = 0;
-	frmt->flags.zero = 0;
-	frmt->width = 0;
-	frmt->precision = -1;
-	frmt->length.h = 0;
-	frmt->length.l = 0;
-	frmt->length.j = 0;
-	frmt->length.z = 0;
-	frmt->specifier = 0;
-}
-
-void	get_format(char const **format, t_format *frmt, va_list args)
-{
-	while (is_flag(**format) || is_length(**format) ||
-			ft_isdigit(**format) || **format == '*' ||
-			**format == '.')
-	{
-		if (is_flag(**format))
-			get_flags(format, frmt);
-		else if (ft_isdigit(**format) || **format == '*')
-			get_width(format, frmt, args);
-		else if (**format == '.')
-			get_precision(format, frmt, args);
-		else if (is_length(**format))
-			get_length(format, frmt);
-	}
-	if (is_specifier(**format))
-	{
-		frmt->specifier = **format;
-		(*format)++;
-	}
-	else
-		// frmt->specifier = '\0';
-		frmt->specifier = 'z';
-	if (frmt->precision >= 0 && frmt->flags.zero)
-		frmt->flags.zero = 0;
-}
-
-int		get_result_str(const char **format, va_list args, int *tmp_len, int full_len)
+static char	*get_result_str(const char **format, va_list args, int *tmp_len, int full_len)
 {
 	t_format	frmt;
 	char		*res_str;
 
 	init_format(&frmt);
-	get_format(format, &frmt, args);
-	res_str = get_str(frmt, args, tmp_len, full_len);
+	fill_format(format, &frmt, args);
+	res_str = get_str_arg(args, frmt, tmp_len);
 	if (res_str)
 		fill_str(&res_str, tmp_len, full_len);
 	return (res_str);
@@ -177,32 +94,30 @@ int		put_n_str(char *str)
 	return (i);
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	int			full_len;
 	int			tmp_len;
 	char		*res_str;
 	va_list		args;
 
-	len = 0;
+	full_len = 0;
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format != '%')
 			ft_putchar(*format++);
-			// format += put_n_str(format);
 		else
 		{
 			format++;
 			if (!(res_str = get_result_str(&format, args, &tmp_len, full_len)))
 				return (-1);
-			write(1, res_str, tmp_size);
-			full_len += size - 1;
+			write(1, res_str, tmp_len);
+			full_len += tmp_len - 1;
 			free(res_str);
 		}
 		full_len++;
 	}
-	// printf("\n full_len main3 = %d\n", full_len);
 	va_end(args);
 	return (full_len);
 }

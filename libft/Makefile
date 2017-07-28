@@ -6,7 +6,7 @@
 #    By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 23:59:50 by mgonon            #+#    #+#              #
-#    Updated: 2017/07/27 14:48:15 by mgonon           ###   ########.fr        #
+#    Updated: 2017/07/28 02:09:06 by mgonon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC = ft_isalpha.c \
 	  ft_lstiter.c \
 	  ft_lstmap.c \
 	  ft_strnew_c.c \
+	  ft_itoa_base.c \
 
 OBJ = ft_isalpha.o \
 	ft_putchar.o \
@@ -135,6 +136,7 @@ OBJ = ft_isalpha.o \
 	ft_lstiter.o \
 	ft_lstmap.o \
 	ft_strnew_c.o \
+	ft_itoa_base.o \
 
 all: $(NAME)
 

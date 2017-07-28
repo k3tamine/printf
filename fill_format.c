@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   feed_frmt.c                                        :+:      :+:    :+:   */
+/*   feed_format.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/03/01 03:30:12 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 02:38:16 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	get_flags(char const **format, t_format *frmt)
+static void	get_flags(char const **format, t_format *frmt)
 {
-	while (is_flag(**format))
+	while (check_is(**format) == IS_FLAG)
 	{
 		if (**format == '+')
 			frmt->flags.plus = 1;
@@ -30,7 +30,7 @@ void	get_flags(char const **format, t_format *frmt)
 	}
 }
 
-void	get_width(char const **format, t_format *frmt, va_list args)
+static void	get_width(char const **format, t_format *frmt, va_list args)
 {
 	if (ft_isdigit(**format))
 	{
@@ -50,7 +50,7 @@ void	get_width(char const **format, t_format *frmt, va_list args)
 	}
 }
 
-void	get_precision(char const **format, t_format *frmt, va_list args)
+static void	get_precision(char const **format, t_format *frmt, va_list args)
 {
 	(*format)++;
 	if (ft_isdigit(**format))
@@ -68,9 +68,9 @@ void	get_precision(char const **format, t_format *frmt, va_list args)
 		frmt->precision = 0;	
 }
 
-void	get_length(char const **format, t_format *frmt)
+static void	get_length(char const **format, t_format *frmt)
 {
-	while (is_length(**format))
+	while (check_is(**format) == IS_LENGTH)
 	{
 		if (**format == 'h')
 			frmt->length.h++;
@@ -82,4 +82,32 @@ void	get_length(char const **format, t_format *frmt)
 			frmt->length.z = 1;
 		(*format)++;
 	}
+}
+
+void	fill_format(char const **format, t_format *frmt, va_list args)
+{
+	while (check_is(**format) == IS_FLAG ||
+		   check_is(**format) == IS_LENGTH ||
+		   ft_isdigit(**format)
+		   || **format == '*' || **format == '.')
+	{
+		if (check_is(**format) == IS_FLAG)
+			get_flags(format, frmt);
+		else if (ft_isdigit(**format) || **format == '*')
+			get_width(format, frmt, args);
+		else if (**format == '.')
+			get_precision(format, frmt, args);
+		else if (check_is(**format) == IS_LENGTH)
+			get_length(format, frmt);
+	}
+	if (check_is(**format) == IS_SPECIFIER)
+	{
+		frmt->specifier = **format;
+		(*format)++;
+	}
+	else
+		// frmt->specifier = '\0';
+		frmt->specifier = 'z';
+	if (frmt->precision >= 0 && frmt->flags.zero)
+		frmt->flags.zero = 0;
 }

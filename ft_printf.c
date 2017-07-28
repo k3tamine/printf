@@ -6,16 +6,16 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 02:53:58 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 04:19:00 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static const t_conv g_conv[] = {
-	{ "dDiuUoOxXp", handle_di }
-	//{ "%", toto_limit}
-};
+// static const t_conv g_conv[] = {
+// 	{ "dDiuUoOxXp", handle_di }
+// 	//{ "%", toto_limit}
+// };
 
 intmax_t	get_arg(t_format frmt, va_list args)
 {
@@ -80,7 +80,6 @@ static char	*get_result_str(const char **format, va_list args, int *tmp_len, int
 	if (res_str)
 		fill_str(&res_str, tmp_len, full_len);
 	return (res_str);
-
 }
 
 int		put_n_str(char *str)

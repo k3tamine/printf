@@ -6,81 +6,79 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 03:31:27 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 03:34:28 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 04:17:13 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*get_arg_c(va_list ap, int *size)
+static char	*get_arg_c(va_list args, int *tmp_len)
 {
 	char	arg;
-	char	*output;
+	char	*res_str;
 
-	arg = (char)va_arg(ap, int);
-	output = ft_strndup(&arg, 1);
-	*size = 1;
-	return (output);
+	arg = (char)va_arg(args, int);
+	// res_str = ft_strndup(&arg, 1);
+	res_str = ft_strnew_c(1, arg);
+	*tmp_len = 1;
+	return (res_str);
 }
 
-static char	*get_arg_s(va_list ap, int *size)
+static char	*get_arg_s(va_list args, int *tmp_len)
 {
 	char	*arg;
-	char	*output;
+	char	*res_str;
 
-	arg = (char*)va_arg(ap, char*);
+	arg = (char*)va_arg(args, char*);
 	if (arg != NULL)
-		output = ft_strdup(arg);
+		res_str = ft_strdup(arg);
 	else
-		output = ft_strdup("(null)");
-	*size = ft_strlen(output);
-	return (output);
+		res_str = ft_strdup("(null)");
+	*tmp_len = ft_strlen(res_str);
+	return (res_str);
 }
 
-static char	*get_arg_lc(va_list ap, int *size)
+static char	*get_arg_lc(va_list args, int *tmp_len)
 {
 	wint_t	arg;
-	char	*output;
+	char	*res_str;
 
-	arg = (wint_t)va_arg(ap, wint_t);
-	if ((output = ft_unicode_encoder(arg)) == NULL)
+	arg = (wint_t)va_arg(args, wint_t);
+	if ((res_str = get_unicode_char(arg)) == NULL)
 		return (NULL);
-	if ((*size = ft_strlen(output)) == 0)
-		*size = 1;
-	return (output);
+	if ((*tmp_len = ft_strlen(res_str)) == 0)
+		*tmp_len = 1;
+	return (res_str);
 }
 
-static char	*get_arg_ls(va_list ap, int *size)
+static char	*get_arg_ls(va_list args, int *tmp_len)
 {
 	wchar_t	*arg;
-	char	*output;
+	char	*res_str;
 
-	arg = (wchar_t*)va_arg(ap, wchar_t*);
+	arg = (wchar_t*)va_arg(args, wchar_t*);
 	if (arg != NULL)
 	{
-		if ((output = ft_unicode_encoder_string(arg)) == NULL)
+		if ((res_str = get_unicode_str(arg)) == NULL)
 			return (NULL);
 	}
 	else
-		output = ft_unicode_encoder_string(L"(null)");
-	*size = ft_strlen(output);
-	return (output);
+		res_str = get_unicode_str(L"(null)");
+	*tmp_len = ft_strlen(res_str);
+	return (res_str);
 }
 
-char		*ftpf_convert_characters(va_list ap, t_format frmt,
-									int *size)
+char		*get_char_arg(va_list args, t_format frmt, int *tmp_len)
 {
 	char	*res_str;
 
-	if (frmt.specifier == 'C' ||
-				(frmt.specifier == 'c' && frmt.length.l == 1))
-		res_str = get_arg_lc(ap, size);
-	else if (frmt.specifier == 'S' ||
-				(frmt.specifier == 's' && frmt.length.l == 1))
-		res_str = get_arg_ls(ap, size);
+	if (frmt.specifier == 'C' || (frmt.specifier == 'c' && frmt.length.l == 1))
+		res_str = get_arg_lc(args, tmp_len);
+	else if (frmt.specifier == 'S' || (frmt.specifier == 's' && frmt.length.l == 1))
+		res_str = get_arg_ls(args, tmp_len);
 	else if (frmt.specifier == 'c')
-		res_str = get_arg_c(ap, size);
+		res_str = get_arg_c(args, tmp_len);
 	else if (frmt.specifier == 's')
-		res_str = get_arg_s(ap, size);
+		res_str = get_arg_s(args, tmp_len);
 	return (res_str);
 }

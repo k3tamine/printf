@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 03:24:02 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 04:18:45 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,14 @@ void	fill_format(char const **format, t_format *frmt, va_list args);
 int		check_is(char c);
 int		get_base(char specifier);
 void	init_format(t_format *frmt);
+char	*get_str_arg(va_list args, t_format frmt, int *tmp_len);
 char	*ft_sign_itoa_base(intmax_t value, int base);
 char	*ft_usign_itoa_base(uintmax_t value, int base);
+char	*get_unicode_str(wchar_t *unicode_str);
+//TODEL
+char	*get_unicode_char(wint_t unicode_c);
+char	*get_char_arg(va_list args, t_format frmt, int *tmp_len);
+
+
 
 #endif

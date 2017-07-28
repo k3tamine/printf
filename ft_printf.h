@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 04:18:45 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 07:46:52 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # define IS_FLAG 1
 # define IS_LENGTH 2
-# define IS_SPECIFIER 3
-# define IS_UNSIGNED 4
-# define IS_SIGNED 5
-# define IS_CHARACTERS 6
+# define IS_UNSIGNED 3
+# define IS_SIGNED 4
+# define IS_CHARACTERS 5
 # include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <wchar.h>
 # include "libft/libft.h"
 
@@ -54,21 +54,24 @@ typedef struct		s_format
 typedef struct		s_conv
 {
 	char	*specifier;
-	int		(*handle)(intmax_t, char *, t_format *);
+	int		(*handle)(long long, char *, t_format *);
 }					t_conv;
 
+int		ft_printf(const char *format, ...);
 void	fill_format(char const **format, t_format *frmt, va_list args);
 int		check_is(char c);
 int		get_base(char specifier);
 void	init_format(t_format *frmt);
 char	*get_str_arg(va_list args, t_format frmt, int *tmp_len);
-char	*ft_sign_itoa_base(intmax_t value, int base);
-char	*ft_usign_itoa_base(uintmax_t value, int base);
+char	*intmaxtoa_base(long long value, int base);
+char	*uintmaxtoa_base(unsigned long long value, int base);
 char	*get_unicode_str(wchar_t *unicode_str);
+char	*get_char_arg(va_list args, t_format frmt, int *tmp_len);
+void	fill_unsigned(char **res_str, int *tmp_len, t_format frmt);
+void	fill_signed(char **res_str, int *tmp_len, t_format frmt);
+void	fill_characters(char **res_str, int *tmp_len, t_format frmt);
+void	apply_width_minus(char **data, int *size, int width);
 //TODEL
 char	*get_unicode_char(wint_t unicode_c);
-char	*get_char_arg(va_list args, t_format frmt, int *tmp_len);
-
-
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   feed_format.c                                      :+:      :+:    :+:   */
+/*   fill_format.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 02:38:16 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 07:10:32 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ static void	get_length(char const **format, t_format *frmt)
 
 void	fill_format(char const **format, t_format *frmt, va_list args)
 {
-	while (check_is(**format) == IS_FLAG ||
-		   check_is(**format) == IS_LENGTH ||
-		   ft_isdigit(**format)
-		   || **format == '*' || **format == '.')
+	while (check_is(**format) == IS_FLAG || check_is(**format) == IS_LENGTH ||
+		   ft_isdigit(**format) || **format == '*' || **format == '.')
 	{
 		if (check_is(**format) == IS_FLAG)
 			get_flags(format, frmt);
@@ -100,14 +98,19 @@ void	fill_format(char const **format, t_format *frmt, va_list args)
 		else if (check_is(**format) == IS_LENGTH)
 			get_length(format, frmt);
 	}
-	if (check_is(**format) == IS_SPECIFIER)
+	if (check_is(**format) >= 3)
 	{
+		if (**format == 'p')
+		{
+			frmt->flags.sharp = 1;
+			frmt->length.l = 1;
+		}
 		frmt->specifier = **format;
 		(*format)++;
 	}
 	else
-		// frmt->specifier = '\0';
-		frmt->specifier = 'z';
+		frmt->specifier = '\0';
+		// frmt->specifier = 'z';
 	if (frmt->precision >= 0 && frmt->flags.zero)
 		frmt->flags.zero = 0;
 }

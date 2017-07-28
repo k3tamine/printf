@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 04:19:00 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/07/28 07:21:59 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 // 	{ "dDiuUoOxXp", handle_di }
 // 	//{ "%", toto_limit}
 // };
-
-intmax_t	get_arg(t_format frmt, va_list args)
-{
-	intmax_t	arg;
-
-	if (check_is(frmt.specifier) == IS_SIGNED)
-		arg = get_signed_arg(args, frmt.specifier, frmt.length);
-	else if (check_is(frmt.specifier) == IS_SIGNED)
-		arg = get_unsigned_arg(args, frmt.specifier, frmt.length);
-	return (arg);
-}
 
 static void	apply_width(char **data, int *size, t_format frmt)
 {
@@ -54,20 +43,20 @@ static void	apply_width(char **data, int *size, t_format frmt)
 	}
 }
 
-// void		ftpf_process_data(char **data, int *size, t_format frmt)
-// {
-// 	if (ftpf_is_unsigned_conv(frmt.specifier))
-// 		ftpf_process_unsigned(data, size, frmt);
-// 	else if (ftpf_is_signed_conv(frmt.specifier))
-// 		ftpf_process_signed(data, size, frmt);
-// 	else if (ftpf_is_characters_conv(frmt.specifier))
-// 		ftpf_process_characters(data, size, frmt);
-// 	else
-// 	{
-// 		if (frmt.width > 0)
-// 			apply_width(data, size, frmt);
-// 	}
-// }
+static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
+{
+	if (check_is(frmt.specifier) == IS_UNSIGNED)
+		fill_unsigned(res_str, tmp_len, frmt);
+	else if (check_is(frmt.specifier) == IS_SIGNED)
+		fill_signed(res_str, tmp_len, frmt);
+	else if (check_is(frmt.specifier) == IS_CHARACTERS)
+		fill_characters(res_str, tmp_len, frmt);
+	else
+	{
+		if (frmt.width > 0)
+			apply_width(res_str, tmp_len, frmt);
+	}
+}
 
 static char	*get_result_str(const char **format, va_list args, int *tmp_len, int full_len)
 {
@@ -78,20 +67,20 @@ static char	*get_result_str(const char **format, va_list args, int *tmp_len, int
 	fill_format(format, &frmt, args);
 	res_str = get_str_arg(args, frmt, tmp_len);
 	if (res_str)
-		fill_str(&res_str, tmp_len, full_len);
+		fill_str_res(&res_str, tmp_len, frmt);
 	return (res_str);
 }
 
-int		put_n_str(char *str)
-{
-	int	i;
+// static int		put_n_str(char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (str[i] && str[i] != '%')
-		i++;
-	write(1, str, i);
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i] && str[i] != '%')
+// 		i++;
+// 	write(1, str, i);
+// 	return (i);
+// }
 
 int			ft_printf(const char *format, ...)
 {

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:38:12 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 08:41:45 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 10:55:49 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 static void	apply_plus_space_flag(char **data, int *size, t_flags flags)
 {
-	char *tmp;
-
 	if (**data != '-')
 	{
-		tmp = *data;
 		if (flags.plus)
 			*data = ft_strjoin("+", *data);
 		else
 			*data = ft_strjoin(" ", *data);
 		*size += 1;
-		free(tmp);
 	}
 }
 
@@ -32,12 +28,10 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 {
 	int		precision;
 	char	*to_add;
-	char	*tmp;
 
 	precision = frmt.precision;
 	if ((precision <= *size && **data != '-') || precision <= *size - 1)
 		return ;
-	tmp = *data;
 	if (**data != '-')
 	{
 		to_add = ft_strnew_c(precision - *size, '0');
@@ -51,7 +45,6 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 		*size = precision + 1;
 	}
 	*data = ft_strjoin(to_add, *data);
-	free(tmp);
 	free(to_add);
 }
 
@@ -59,10 +52,8 @@ static void	apply_width_nominus(char **data, int *size, t_format frmt)
 {
 	int		width;
 	char	*to_add;
-	char	*tmp;
 
 	width = frmt.width;
-	tmp = *data;
 	if (frmt.flags.zero == 0 || frmt.precision >= 0)
 		to_add = ft_strnew_c(width - *size, ' ');
 	else if (**data != '-' && **data != ' ' && **data != '+')
@@ -75,7 +66,6 @@ static void	apply_width_nominus(char **data, int *size, t_format frmt)
 	}
 	*data = ft_strjoin(to_add, *data);
 	*size = width;
-	free(tmp);
 	free(to_add);
 }
 

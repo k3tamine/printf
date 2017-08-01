@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 07:46:52 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 12:39:58 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <wchar.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct		s_flags
@@ -63,8 +64,8 @@ int		check_is(char c);
 int		get_base(char specifier);
 void	init_format(t_format *frmt);
 char	*get_str_arg(va_list args, t_format frmt, int *tmp_len);
-char	*intmaxtoa_base(long long value, int base);
-char	*uintmaxtoa_base(unsigned long long value, int base);
+char	*intmaxtoa_base(intmax_t value, int base);
+char	*uintmaxtoa_base(uintmax_t value, int base);
 char	*get_unicode_str(wchar_t *unicode_str);
 char	*get_char_arg(va_list args, t_format frmt, int *tmp_len);
 void	fill_unsigned(char **res_str, int *tmp_len, t_format frmt);

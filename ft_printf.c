@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 07:21:59 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 13:28:46 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,36 @@
 // 	{ "dDiuUoOxXp", handle_di }
 // 	//{ "%", toto_limit}
 // };
+
+// static void	apply_width(char **data, int *size, t_format frmt)
+// {
+// 	int		width;
+// 	char	*to_add;
+
+// 	width = frmt.width;
+// 	if (width > *size)
+// 	{
+// 		if (!frmt.flags.zero || frmt.flags.minus)
+// 			to_add = ft_strnew_c(width - *size, ' ');
+// 		else
+// 			to_add = ft_strnew_c(width - *size, '0');
+// 		if (to_add == NULL)
+// 			return ;
+// 		if (!frmt.flags.minus)
+// 		{
+// 			// printf("LA 1st\n");
+// 			// printf("data =")
+// 			*data = ft_strjoin(to_add, *data);
+// 		}
+// 		else
+// 		{
+// 			// printf("ICI\n");
+// 			*data = ft_strjoin(*data, to_add);
+// 		}
+// 		*size = width;
+// 		free(to_add);
+// 	}
+// }
 
 static void	apply_width(char **data, int *size, t_format frmt)
 {
@@ -33,15 +63,16 @@ static void	apply_width(char **data, int *size, t_format frmt)
 			to_add = ft_strnew_c(width - *size, '0');
 		if (to_add == NULL)
 			return ;
-		if (frmt.flags.minus)
-			*data = ft_strjoin(*data, to_add);
-		else
+		if (frmt.flags.minus == 0)
 			*data = ft_strjoin(to_add, *data);
+		else
+			*data = ft_strjoin(*data, to_add);
 		*size = width;
 		free(tmp);
 		free(to_add);
 	}
 }
+
 
 static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
 {

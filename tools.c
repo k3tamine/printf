@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 08:08:58 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 13:00:24 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,28 @@ int		get_base(char specifier)
 	return (-1);
 }
 
-char	*intmaxtoa_base(long long value, int base)
+char	*intmaxtoa_base(intmax_t value, int base)
 {
 	char		*res;
-	long long	nb;
+	intmax_t	nb;
 	int			sign;
 	int			i;
 
 	if (base < 2 || base > 16)
 		return (NULL);
-	nb = (value < 0) ? -value : value;
+	nb = (value > 0) ? -value : value;
 	sign = (value < 0 && base == 10) ? -1 : 0;
 	i = (sign == -1) ? 2 : 1;
-	while ((nb /= base) >= 1)
+	while ((nb /= base) <= -1)
 		i++;
-	if (!(res = (char*)malloc(sizeof(char) * (i + 1))))
+	if (!(res = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	res[i] = '\0';
-	nb = (value < 0) ? -value : value;
+	nb = (value > 0) ? -value : value;
 	while (i + sign)
 	{
-		res[--i] = (nb % base < 10) ? nb % base + '0'
-					: nb % base + 'A' - 10;
+		res[--i] = (nb % base < 10) ? -(nb % base) + '0'
+					: -(nb % base) + 'A' - 10;
 		nb /= base;
 	}
 	if (i == 1)
@@ -91,11 +91,11 @@ char	*intmaxtoa_base(long long value, int base)
 	return (res);
 }
 
-char	*uintmaxtoa_base(unsigned long long value, int base)
+char	*uintmaxtoa_base(uintmax_t value, int base)
 {
-	char				*res;
-	unsigned long long	nb;
-	int					i;
+	char		*res;
+	uintmax_t	nb;
+	int			i;
 
 	if (base < 2 || base > 16)
 		return (NULL);

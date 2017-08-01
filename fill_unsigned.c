@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:24:59 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 08:32:05 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 12:43:27 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,40 @@ static void	apply_zero_cases(char **res_str, int *tmp_len, t_format *frmt)
 		frmt->flags.sharp = 0;
 }
 
+// static void	apply_sharp_flag(char **res_str, int *tmp_len, char id)
+// {
+// 	char *tmp;
+
+// 	tmp = *res_str;
+// 	if (id == 'o' || id == 'O')
+// 	{
+// 		if (**res_str == '0')
+// 			return ;
+// 		*res_str = ft_strjoin("0", tmp);
+// 		*tmp_len += 1;
+// 		free(tmp);
+// 	}
+// 	else if (id == 'x' || id == 'X' || id == 'p')
+// 	{
+// 		*res_str = ft_strjoin("0x", tmp);
+// 		*tmp_len += 2;
+// 		free(tmp);
+// 	}
+// }
+
 static void	apply_sharp_flag(char **res_str, int *tmp_len, char id)
 {
-	char *tmp;
-
-	tmp = *res_str;
 	if (id == 'o' || id == 'O')
 	{
 		if (**res_str == '0')
 			return ;
-		*res_str = ft_strjoin("0", tmp);
+		*res_str = ft_strjoin("0", *res_str);
 		*tmp_len += 1;
-		free(tmp);
 	}
 	else if (id == 'x' || id == 'X' || id == 'p')
 	{
-		*res_str = ft_strjoin("0x", tmp);
+		*res_str = ft_strjoin("0x", *res_str);
 		*tmp_len += 2;
-		free(tmp);
 	}
 }
 
@@ -69,14 +85,11 @@ static void	apply_precision(char **res_str, int *tmp_len, t_format frmt)
 {
 	int		precision;
 	char	*to_add;
-	char	*tmp;
 
 	precision = frmt.precision;
-	tmp = *res_str;
 	to_add = ft_strnew_c(precision - *tmp_len, '0');
 	*res_str = ft_strjoin(to_add, *res_str);
 	*tmp_len = precision;
-	free(tmp);
 	free(to_add);
 }
 
@@ -84,10 +97,8 @@ static void	apply_width_nominus(char **res_str, int *tmp_len, t_format frmt)
 {
 	int		width;
 	char	*to_add;
-	char	*tmp;
 
 	width = frmt.width;
-	tmp = *res_str;
 	if (frmt.flags.zero == 0 || frmt.precision > 0)
 		to_add = ft_strnew_c(width - *tmp_len, ' ');
 	else if (frmt.flags.sharp &&
@@ -101,9 +112,8 @@ static void	apply_width_nominus(char **res_str, int *tmp_len, t_format frmt)
 	}
 	else
 		to_add = ft_strnew_c(width - *tmp_len, '0');
-	*res_str = ft_strjoin(to_add, tmp);
+	*res_str = ft_strjoin(to_add, *res_str);
 	*tmp_len = width;
-	free(tmp);
 	free(to_add);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 07:10:32 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/01 13:27:56 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	fill_format(char const **format, t_format *frmt, va_list args)
 		else if (check_is(**format) == IS_LENGTH)
 			get_length(format, frmt);
 	}
-	if (check_is(**format) >= 3)
+	if (**format)
 	{
 		if (**format == 'p')
 		{
@@ -110,7 +110,6 @@ void	fill_format(char const **format, t_format *frmt, va_list args)
 	}
 	else
 		frmt->specifier = '\0';
-		// frmt->specifier = 'z';
 	if (frmt->precision >= 0 && frmt->flags.zero)
 		frmt->flags.zero = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 13:27:56 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 13:32:55 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	get_precision(char const **format, t_format *frmt, va_list args)
 		frmt->precision = va_arg(args, int);
 	}
 	else
-		frmt->precision = 0;	
+		frmt->precision = 0;
 }
 
 static void	get_length(char const **format, t_format *frmt)
@@ -84,10 +84,10 @@ static void	get_length(char const **format, t_format *frmt)
 	}
 }
 
-void	fill_format(char const **format, t_format *frmt, va_list args)
+void		fill_format(char const **format, t_format *frmt, va_list args)
 {
 	while (check_is(**format) == IS_FLAG || check_is(**format) == IS_LENGTH ||
-		   ft_isdigit(**format) || **format == '*' || **format == '.')
+			ft_isdigit(**format) || **format == '*' || **format == '.')
 	{
 		if (check_is(**format) == IS_FLAG)
 			get_flags(format, frmt);
@@ -110,6 +110,6 @@ void	fill_format(char const **format, t_format *frmt, va_list args)
 	}
 	else
 		frmt->specifier = '\0';
-	if (frmt->precision >= 0 && frmt->flags.zero)
-		frmt->flags.zero = 0;
+	// if (frmt->precision > 0 && frmt->flags.zero)
+	// 	frmt->flags.zero = 0;
 }

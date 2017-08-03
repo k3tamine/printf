@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:24:59 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 12:43:27 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 13:35:08 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,6 @@ static void	apply_zero_cases(char **res_str, int *tmp_len, t_format *frmt)
 	if (frmt->specifier == 'x' || frmt->specifier == 'X')
 		frmt->flags.sharp = 0;
 }
-
-// static void	apply_sharp_flag(char **res_str, int *tmp_len, char id)
-// {
-// 	char *tmp;
-
-// 	tmp = *res_str;
-// 	if (id == 'o' || id == 'O')
-// 	{
-// 		if (**res_str == '0')
-// 			return ;
-// 		*res_str = ft_strjoin("0", tmp);
-// 		*tmp_len += 1;
-// 		free(tmp);
-// 	}
-// 	else if (id == 'x' || id == 'X' || id == 'p')
-// 	{
-// 		*res_str = ft_strjoin("0x", tmp);
-// 		*tmp_len += 2;
-// 		free(tmp);
-// 	}
-// }
 
 static void	apply_sharp_flag(char **res_str, int *tmp_len, char id)
 {

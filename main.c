@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/08/01 15:00:02 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 13:17:32 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int		main(int ac, char **av)
 	// printf("ret = %D\n\n", printf("test %p\n", &ret));
 	// printf("ret = %D\n\n", ft_printf("{%15ZPK}", 123));
 	// printf("ret = %D\n\n", printf("{%15ZPK}", 123));
-	printf("ret = %D\n\n", printf("{%05.c}", 0));
-	printf("ret = %D\n\n", ft_printf("{%05.c}", 0));
+	printf("ret = %D\n\n", printf("{%05.c}\n", 0));
+	printf("ret = %D\n\n", ft_printf("{%05.c}\n", 0));
 	printf("\n\n========= TEST END =========\n\n");
 	// printf("long_min = %ld\n", LONG_MIN);
 	// printf("long_long_min = %lld\n", LONG_LONG_MIN);

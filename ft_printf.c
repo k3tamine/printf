@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 13:28:46 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 17:11:34 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,62 +17,28 @@
 // 	//{ "%", toto_limit}
 // };
 
-// static void	apply_width(char **data, int *size, t_format frmt)
-// {
-// 	int		width;
-// 	char	*to_add;
-
-// 	width = frmt.width;
-// 	if (width > *size)
-// 	{
-// 		if (!frmt.flags.zero || frmt.flags.minus)
-// 			to_add = ft_strnew_c(width - *size, ' ');
-// 		else
-// 			to_add = ft_strnew_c(width - *size, '0');
-// 		if (to_add == NULL)
-// 			return ;
-// 		if (!frmt.flags.minus)
-// 		{
-// 			// printf("LA 1st\n");
-// 			// printf("data =")
-// 			*data = ft_strjoin(to_add, *data);
-// 		}
-// 		else
-// 		{
-// 			// printf("ICI\n");
-// 			*data = ft_strjoin(*data, to_add);
-// 		}
-// 		*size = width;
-// 		free(to_add);
-// 	}
-// }
-
-static void	apply_width(char **data, int *size, t_format frmt)
+static void		apply_width(char **data, int *size, t_format frmt)
 {
 	int		width;
 	char	*to_add;
-	char	*tmp;
 
 	width = frmt.width;
 	if (width > *size)
 	{
-		tmp = *data;
-		if (frmt.flags.zero == 0 || frmt.flags.minus == 1)
+		if (!frmt.flags.zero || frmt.flags.minus)
 			to_add = ft_strnew_c(width - *size, ' ');
 		else
 			to_add = ft_strnew_c(width - *size, '0');
 		if (to_add == NULL)
 			return ;
-		if (frmt.flags.minus == 0)
+		if (!frmt.flags.minus)
 			*data = ft_strjoin(to_add, *data);
 		else
 			*data = ft_strjoin(*data, to_add);
 		*size = width;
-		free(tmp);
 		free(to_add);
 	}
 }
-
 
 static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
 {
@@ -89,7 +55,8 @@ static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
 	}
 }
 
-static char	*get_result_str(const char **format, va_list args, int *tmp_len, int full_len)
+static char		*get_result_str(const char **format,
+								va_list args, int *tmp_len, int full_len)
 {
 	t_format	frmt;
 	char		*res_str;
@@ -102,30 +69,38 @@ static char	*get_result_str(const char **format, va_list args, int *tmp_len, int
 	return (res_str);
 }
 
-// static int		put_n_str(char *str)
-// {
-// 	int	i;
+static int		put_n_str(const char *str)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (str[i] && str[i] != '%')
-// 		i++;
-// 	write(1, str, i);
-// 	return (i);
-// }
+	i = 0;
+	while (str[i] && str[i] != '%')
+		i++;
+	write(1, str, i);
+	return (i);
+}
 
-int			ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	int			full_len;
 	int			tmp_len;
 	char		*res_str;
+	int			len_test;
 	va_list		args;
 
+	len_test = 0;
 	full_len = 0;
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format != '%')
+		{
+			// put_n_str(format);
+			// len_test = put_n_str(format);
+			// format += len_test;
+			// full_len += len_test;
 			ft_putchar(*format++);
+		}
 		else
 		{
 			format++;
@@ -140,335 +115,3 @@ int			ft_printf(const char *format, ...)
 	va_end(args);
 	return (full_len);
 }
-
-
-// int	main()
-// {
-	// // ft_printf("ft_printf .10d, 12345 = %.10d\n", 12345);
-	// // printf("printf 10.10d, 12345 = %.10d\n", 12345);
-	// // ft_printf("toto %.10d eogiwhod %32d", 12, 24);
-
-
-  /* Verification des decimals, %i et %d */
-
-//   ft_printf("%d\n", ft_printf("1chiffre 1 %d chiffre 2 %d\n", 42, -42));
-//   printf("%d\n", printf("1chiffre 1 %d chiffre 2 %d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("2chiffre 1 %   d chiffre 2 % d\n", 42, -42));
-//   printf("%d\n", printf("2chiffre 1 %   d chiffre 2 % d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42));
-//   printf("%d\n", printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("4chiffre 1 %-12d chiffre 2 %-12d\n", 42, -42));
-//   printf("%d\n", printf("4chiffre 1 %-12d chiffre 2 %-12d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("5chiffre 1 %0d chiffre 2 %0d\n", 42, -42));
-//   printf("%d\n", printf("5chiffre 1 %0d chiffre 2 %0d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42));
-//   printf("%d\n", printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42));
-//   printf("%d\n", printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6));
-//   printf("%d\n", printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6));
-
-//   ft_printf("%d\n", ft_printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6));
-//   printf("%d\n", printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6));
-
-//   ft_printf("%d\n", ft_printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6));
-//   printf("%d\n", printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6));
-
-//   ft_printf("%d\n", ft_printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6));
-//   printf("%d\n", printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6));
-  
-//   ft_printf("%d\n", ft_printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42));
-//   printf("%d\n", printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42));  
-
-//   ft_printf("%d\n", ft_printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42));
-//   printf("%d\n", printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42));
-//   printf("%d\n", printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42));
-//   printf("%d\n", printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("16chiffre 1 %.6d chiffre 2 %.6d\n", 42, -42));
-//   printf("%d\n", printf("16chiffre 1 %.6d chiffre 2 %.6d\n", 42, -42));
-
-//   ft_printf("%d\n", ft_printf("16chiffre 1 %.8d chiffre 2 %.8d\n", -442, -42));
-//   printf("%d\n", printf("16chiffre 1 %.8d chiffre 2 %.8d\n", -442, -42));
-
-//   	ft_printf("1chiffre 1 %-010.5d chiffre 2 %-010.5d\n", 42, -42);
-//   printf("1chiffre 1 %-010.5d chiffre 2 %-010.5d\n", 42, -42);
-
-//   	ft_printf("2chiffre 1 %010.5d chiffre 2 %010.5d\n", 42, -42);
-//   printf("2chiffre 1 %010.5d chiffre 2 %010.5d\n", 42, -42);
-
-//  	ft_printf("2chiffre 1 % d chiffre 2 % d\n", 42, -42);
-//   printf("2chiffre 1 % d chiffre 2 % d\n", 42, -42);
-
-//  	ft_printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42);
-//   printf("3chiffre 1 %12d chiffre 2 %12d\n", 42, -42);
-
-//  	ft_printf("4chiffre 1 %-012d chiffre 2 %-012d\n", 42, -42);
-//   printf("4chiffre 1 %-012d chiffre 2 %-012d\n", 42, -42);
-
-//  	ft_printf("5chiffre 1 %010d chiffre 2 %010d\n", 42, -42);
-//   printf("5chiffre 1 %010d chiffre 2 %010d\n", 42, -42);
-
-//  	ft_printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42);
-//   printf("6chiffre 1 %012d chiffre 2 %012d\n", 42, -42);
-
-//  	ft_printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42);
-//   printf("7chiffre 1 %-012d chiffre 2 %012d\n", 42, -42);
-
-//  	ft_printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6);
-//   printf("8chiffre 1 %*d chiffre 2 %*d\n", 42, 6, 6, 6);
-
-//  	ft_printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6);
-//   printf("9chiffre 1 %+d chiffre 2 %+d\n", 42, 6, -42, 6);
-
-//  	ft_printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6);
-//   printf("10chiffre 1 %+12d chiffre 2 %+12d\n", 42, 6, -42, 6);
-
-//  	ft_printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6);
-//   printf("11chiffre 1 %*12d chiffre 2 %*12d\n", 42, -6, 42, 6);
-  
-//  	ft_printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42);
-//   printf("12chiffre 1 %-+5d chiffre 2 %-+5d\n", 42, -42);  
-
-//  	ft_printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42);
-//   printf("13chiffre 1 %-+05d chiffre 2 %-+05d\n", 42, -42);
-
-//  	ft_printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42);
-//   printf("14chiffre 1 %+-5d chiffre 2 %+-5d\n", 42, -42);
-
-//  	ft_printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42);
-//   printf("15chiffre 1 %.d chiffre 2 %.d\n", 42, -42);
-
-//  	ft_printf("16chiffre 1 %.6d chiffre 2 %.6d\n\n\n", 42, -42);
-//   printf("16chiffre 1 %.6d chiffre 2 %.6d\n", 42, -42);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-// 	int	ret;
-
-// 	// test for %d 0; //
-// 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%d 0;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
-
-// 	printf("------------------------------------\n");
-// 	ret = printf("{%d}\n", 0);
-// 	printf("%35s%d\n", "printf('%d', 0) ret : ", ret);
-// 	ret = ft_printf("{%d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+d}\n", 0);
-// 	printf("%35s%d\n", "printf('%+d', 0) ret : ", ret);
-// 	ret = ft_printf("{%+d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%+d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%.d}\n", 0);
-// 	printf("%35s%d\n", "printf('%.d', 0) ret : ", ret);
-// 	ret = ft_printf("{%.d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%.d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%.5d}\n", 0);
-// 	printf("%35s%d\n", "printf('%.5d', 0) ret : ", ret);
-// 	ret = ft_printf("{%.5d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%.5d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%.0d}\n", 0);
-// 	printf("%35s%d\n", "printf('%.0d', 0) ret : ", ret);
-// 	ret = ft_printf("{%.0d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%.0d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%5.d}\n", 0);
-// 	printf("%35s%d\n", "printf('%5.d', 0) ret : ", ret);
-// 	ret = ft_printf("{%5.d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%5.d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%5.5d}\n", 0);
-// 	printf("%35s%d\n", "printf('%5.5d', 0) ret : ", ret);
-// 	ret = ft_printf("{%5.5d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%5.5d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%3.5d}\n", 0);
-// 	printf("%35s%d\n", "printf('%3.5d', 0) ret : ", ret);
-// 	ret = ft_printf("{%3.5d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%3.5d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%5.3d}\n", 0);
-// 	printf("%35s%d\n", "printf('%5.3d', 0) ret : ", ret);
-// 	ret = ft_printf("{%5.3d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%5.3d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+010.d}\n", 0);
-// 	printf("%35s%d\n", "printf('%+010.d', 0) ret : ", ret);
-// 	ret = ft_printf("{%+010.d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%+010.d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+010.5d}\n", 0);
-// 	printf("%35s%d\n", "printf('% 010.5d', 0) ret : ", ret);
-// 	ret = ft_printf("{%+010.5d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('% 010.5d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{% .d}\n", 0);
-// 	printf("%35s%d\n", "printf('% .d', 0) ret : ", ret);
-// 	ret = ft_printf("{% .d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('% .d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+.d}\n", 0);
-// 	printf("%35s%d\n", "printf('%+.d', 0) ret : ", ret);
-// 	ret = ft_printf("{%+.d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%+.d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%3.2d}\n", 0);
-// 	printf("%35s%d\n", "printf('%3.2d', 0) ret : ", ret);
-// 	ret = ft_printf("{%3.2d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%3.2d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%-3.2d}\n", 0);
-// 	printf("%35s%d\n", "printf('%-3.2d', 0) ret : ", ret);
-// 	ret = ft_printf("{%-3.2d}\n", 0);
-// 	printf("%35s%d\n", "ft_printf('%-3.2d', 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	// test for %d 1; //
-// 	ret = printf("{%+010.d}\n", 1);
-// 	printf("%35s%d\n", "printf('%+010.d', 1) ret : ", ret);
-// 	ret = ft_printf("{%+010.d}\n", 1);
-// 	printf("%35s%d\n", "ft_printf('%+010.d', 1) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+010.0d}\n", 1);
-// 	printf("%35s%d\n", "printf('%+010.0d', 1) ret : ", ret);
-// 	ret = ft_printf("{%+010.0d}\n", 1);
-// 	printf("%35s%d\n", "ft_printf('%+010.0d', 1) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+10d}\n", 1);
-// 	printf("%35s%d\n", "printf('%+10d', 1) ret : ", ret);
-// 	ret = ft_printf("{%+10d}\n", 1);
-// 	printf("%35s%d\n", "ft_printf('%+10d', 1) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%+010.5d}\n", 1);
-// 	printf("%35s%d\n", "printf('%+010.5d', 1) ret : ", ret);
-// 	ret = ft_printf("{%+010.5d}\n", 1);
-// 	printf("%35s%d\n", "ft_printf('%+010.5d', 1) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%d}\n", -1);
-// 	printf("%35s%d\n", "printf('%d', -1) ret : ", ret);
-// 	ret = ft_printf("{%d}\n", -1);
-// 	printf("%35s%d\n", "ft_printf('%d', -1) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	// test for %d 42; //
-// 	printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%d 42;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
-
-// 	printf("------------------------------------\n");
-// 	ret = printf("{%5d}\n", 42);
-// 	printf("%35s%d\n", "printf('%5d', 42) ret : ", ret);
-// 	ret = ft_printf("{%5d}\n", 42);
-// 	printf("%35s%d\n", "ft_printf('%5d', 42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%05d}\n", 42);
-// 	printf("%35s%d\n", "printf('%05d', 42) ret : ", ret);
-// 	ret = ft_printf("{%05d}\n", 42);
-// 	printf("%35s%d\n", "ft_printf('%05d', 42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%0+5d}\n", 42);
-// 	printf("%35s%d\n", "printf('%0+5d', 42) ret : ", ret);
-// 	ret = ft_printf("{%0+5d}\n", 42);
-// 	printf("%35s%d\n", "ft_printf('%0+5d', 42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%5d}\n", -42);
-// 	printf("%35s%d\n", "printf('%5d', -42) ret : ", ret);
-// 	ret = ft_printf("{%5d}\n", -42);
-// 	printf("%35s%d\n", "ft_printf('%5d', -42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%05d}\n", -42);
-// 	printf("%35s%d\n", "printf('%05d', -42) ret : ", ret);
-// 	ret = ft_printf("{%05d}\n", -42);
-// 	printf("%35s%d\n", "ft_printf('%05d', -42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%-05d}\n", -42);
-// 	printf("%35s%d\n", "printf('%-05d', -42) ret : ", ret);
-// 	ret = ft_printf("{%-05d}\n", -42);
-// 	printf("%35s%d\n", "ft_printf('%-05d', -42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%-05d}\n", 42);
-// 	printf("%35s%d\n", "printf('%-05d', 42) ret : ", ret);
-// 	ret = ft_printf("{%-05d}\n", 42);
-// 	printf("%35s%d\n", "ft_printf('%-05d', 42) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	// test for %*d ; //
-// 	printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n          test for %%*d ;\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
-
-// 	printf("------------------------------------\n");
-// 	ret = printf("{%*d}\n", -5, 5);	
-// 	printf("%35s%d\n", "printf('%*d', -5, 5) ret : ", ret);
-// 	ret = ft_printf("{%*d}\n", -5, 5);
-// 	printf("%35s%d\n", "ft_printf('%*d', -5, 5) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	ret = printf("{%*d}\n", 0, 0);
-// 	printf("%35s%d\n", "printf('%*d', 0, 0) ret : ", ret);
-// 	ret = ft_printf("{%*d}\n", 0, 0);
-// 	printf("%35s%d\n", "ft_printf('%*d', 0, 0) ret : ", ret);
-// 	printf("------------------------------------\n");
-
-// 	printf("%d\n", printf("%10.5d\n", 42));
-// 	ft_printf("%d\n", ft_printf("%10.5d\n", 42));
-
-// 	ft_printf("%d\n", ft_printf("%.10d\n", 4242));
-// 	ft_printf("%d\n", printf("%.10d\n", 4242));
-// 	printf("%d\n", printf("%.10d\n", 4242));
-// 	printf("%d\n", ft_printf("%.10d\n", 4242));
-
-// 	return (0);
-// }

@@ -6,13 +6,14 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 01:51:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 13:29:04 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 13:37:00 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static intmax_t		get_signed_arg(va_list args, char specifier, t_length length)
+static intmax_t		get_signed_arg(va_list args,
+									char specifier, t_length length)
 {
 	intmax_t arg;
 
@@ -30,18 +31,18 @@ static intmax_t		get_signed_arg(va_list args, char specifier, t_length length)
 		arg = (intmax_t)(short)va_arg(args, int);
 	else
 		arg = (intmax_t)va_arg(args, int);
-
 	return (arg);
 }
 
-static uintmax_t	get_unsigned_arg(va_list args, char specifier, t_length length)
+static uintmax_t	get_unsigned_arg(va_list args,
+									char specifier, t_length length)
 {
 	uintmax_t arg;
 
 	if (length.l >= 2)
 		arg = (uintmax_t)va_arg(args, unsigned long long);
 	else if (length.l == 1 || specifier == 'U' ||
-			 specifier == 'O' || specifier == 'B')
+			specifier == 'O' || specifier == 'B')
 		arg = (uintmax_t)va_arg(args, unsigned long);
 	else if (length.z >= 1)
 		arg = (uintmax_t)va_arg(args, size_t);

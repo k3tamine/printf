@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 13:00:24 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 13:38:18 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	init_format(t_format *frmt)
 	frmt->specifier = 0;
 }
 
-int	check_is(char c)
+int		check_is(char c)
 {
 	if (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+')
 		return (IS_FLAG);
 	else if (c == 'l' || c == 'h' || c == 'j' || c == 'z')
 		return (IS_LENGTH);
 	else if (c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-			 c == 'u' || c == 'U' || c == 'p')
+			c == 'u' || c == 'U' || c == 'p')
 		return (IS_UNSIGNED);
 	else if (c == 'd' || c == 'D' || c == 'i')
 		return (IS_SIGNED);
@@ -52,8 +52,8 @@ int		get_base(char specifier)
 	if (specifier == 'x' || specifier == 'X' || specifier == 'p')
 		return (16);
 	else if (specifier == 'u' || specifier == 'U' ||
-			 specifier == 'd' || specifier == 'D' ||
-			 specifier == 'i')
+			specifier == 'd' || specifier == 'D' ||
+			specifier == 'i')
 		return (10);
 	else if (specifier == 'o' || specifier == 'O')
 		return (8);
@@ -99,7 +99,7 @@ char	*uintmaxtoa_base(uintmax_t value, int base)
 
 	if (base < 2 || base > 16)
 		return (NULL);
-    nb = value;
+	nb = value;
 	i = 1;
 	while ((nb /= base) >= 1)
 		i++;

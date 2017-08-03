@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/07/28 05:52:55 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/02 17:04:36 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static void	apply_width(char **data, int *size, t_format frmt)
 	if (width > *size)
 	{
 		tmp = *data;
-		if (frmt.flags.zero == 0 || frmt.flags.minus)
+		if (!frmt.flags.zero || frmt.flags.minus)
 			*data = ft_strnew_c(width, ' ');
 		else
 			*data = ft_strnew_c(width, '0');
-		if (frmt.flags.minus == 0)
+		if (!frmt.flags.minus)
 			ft_strncpy(*data + width - *size, tmp, *size);
 		else
 			ft_strncpy(*data, tmp, *size);

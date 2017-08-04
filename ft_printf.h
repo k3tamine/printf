@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/01 12:39:58 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/04 13:20:48 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct		s_format
 typedef struct		s_conv
 {
 	char	*specifier;
-	int		(*handle)(long long, char *, t_format *);
+	void	(*f)(char **, int *, t_format);
 }					t_conv;
 
 int		ft_printf(const char *format, ...);

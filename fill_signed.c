@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:38:12 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/02 13:35:45 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/04 11:31:19 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,11 @@ void		fill_signed(char **data, int *size, t_format frmt)
 	}
 	if ((frmt.flags.space || frmt.flags.plus))
 		apply_plus_space_flag(data, size, frmt.flags);
-	if (frmt.width > *size && frmt.flags.minus == 0)
-		apply_width_nominus(data, size, frmt);
-	if (frmt.width > *size && frmt.flags.minus == 1)
-		apply_width_minus(data, size, frmt.width);
+	if (frmt.width > *size)
+	{
+		if (frmt.flags.minus)
+			apply_width_minus(data, size, frmt.width);
+		else
+			apply_width_nominus(data, size, frmt);
+	}
 }

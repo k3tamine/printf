@@ -6,14 +6,14 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/02 17:11:34 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/04 13:21:10 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 // static const t_conv g_conv[] = {
-// 	{ "dDiuUoOxXp", handle_di }
+// 	{ "dDiuUoOxXp", fill_unsigned }
 // 	//{ "%", toto_limit}
 // };
 

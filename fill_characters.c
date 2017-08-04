@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/02 17:04:36 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/03 12:11:32 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static int	octets_to_print(char *str)
 {
-	unsigned char	octet;
+	char	octet;
 
-	octet = (unsigned char)*str;
+	octet = *str;
+	// printf("LA octet = %c\n", octet);
 	if ((octet & 128) == 0)
 		return (1);
 	if ((octet & 224) == 192)
@@ -54,31 +55,53 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 	}
 }
 
-static void	apply_width(char **data, int *size, t_format frmt)
+// static void	apply_width(char **data, int *size, t_format frmt)
+// {
+// 	int		width;
+// 	char	*tmp;
+
+// 	width = frmt.width;
+// 	if (width > *size)
+// 	{
+// 		tmp = *data;
+// 		if (!frmt.flags.zero || frmt.flags.minus)
+// 			*data = ft_strnew_c(width, ' ');
+// 		else
+// 			*data = ft_strnew_c(width, '0');
+// 		if (!frmt.flags.minus)
+// 			ft_strncpy(*data + width - *size, tmp, *size);
+// 		else
+// 			ft_strncpy(*data, tmp, *size);
+// 		*size = width;
+// 		free(tmp);
+// 	}
+// }
+
+static void		apply_width(char **data, int *size, t_format frmt)
 {
 	int		width;
 	char	*to_add;
-	char	*tmp;
 
 	width = frmt.width;
 	if (width > *size)
 	{
-		tmp = *data;
 		if (!frmt.flags.zero || frmt.flags.minus)
-			*data = ft_strnew_c(width, ' ');
+			to_add = ft_strnew_c(width - *size, ' ');
 		else
-			*data = ft_strnew_c(width, '0');
+			to_add = ft_strnew_c(width - *size, '0');
+		if (to_add == NULL)
+			return ;
 		if (!frmt.flags.minus)
-			ft_strncpy(*data + width - *size, tmp, *size);
+			*data = ft_strjoin(to_add, *data);
 		else
-			ft_strncpy(*data, tmp, *size);
+			*data = ft_strjoin(*data, to_add);
 		*size = width;
-		free(tmp);
+		free(to_add);
 	}
 }
 
 void		fill_characters(char **data, int *size,
-									t_format frmt)
+							t_format frmt)
 {
 	if (frmt.precision > -1 && frmt.precision < *size)
 		apply_precision(data, size, frmt);

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/04 13:20:48 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/16 17:33:26 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdlib.h>
 # include <wchar.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct		s_flags
 {
@@ -54,8 +54,8 @@ typedef struct		s_format
 
 typedef struct		s_conv
 {
-	char	*specifier;
-	void	(*f)(char **, int *, t_format);
+	const char	*specifier;
+	void		(*fill_str)(char **, int *, t_format);
 }					t_conv;
 
 int		ft_printf(const char *format, ...);

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/08/16 18:13:55 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 14:25:55 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ int		main(int ac, char **av)
 	// printf("ret = %D\n\n", printf("test %p\n", &ret));
 	// printf("ret = %D\n\n", ft_printf("{%15ZPK}", 123));
 	// printf("ret = %D\n\n", printf("{%15ZPK}", 123));
-	printf("ret = %d\n\n", printf("{%lc} toto\n", L'ሴ'));
-	printf("ret = %d\n\n", ft_printf("{%lc} toto\n", L'ሴ'));
-	printf("ret = %d\n\n", printf("{%lc}\n", 55296));
-	printf("ret = %d\n\n", ft_printf("{%lc}\n", 55296));
+	// printf("ret = %d\n\n", printf("{%lc} toto\n", L'ሴ'));
+	// printf("ret = %d\n\n", ft_printf("{%lc} toto\n", L'ሴ'));
+	// printf("ret = %d\n\n", printf("{%lc}\n", 55296));
+	// printf("ret = %d\n\n", ft_printf("{%lc}\n", 55296));
+	printf("ret = %d\n\n", printf("Simple chaine\n"));
+	printf("ret = %d\n\n", ft_printf("Simple chaine\n"));
 	
 	// printf("\n\n========= TEST END =========\n\n");
 

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 18:13:37 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 14:46:20 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,27 @@ static char		*get_result_str(const char **format,
 	return (res_str);
 }
 
+static void		buf_handler(char *buf, char c, int *i, int print)
+{
+	if (*i > 4094)
+	{
+		write(1, buf, *i);
+		*i = 0;
+		buf[*i] = c;
+		*i = *i + 1;
+	}
+	if (!print)
+	{
+		buf[*i] = c;
+		*i = *i + 1;
+	}
+	else
+	{
+		write(1, buf, *i);
+		*i = 0;
+	}
+}
+
 int				ft_printf(const char *format, ...)
 {
 	char		*res_str;
@@ -105,21 +126,10 @@ int				ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format != '%')
-		{
-			if (i > 4094 || *format == '\0')
-			{
-				write(1, buf, i);
-				i = 0;
-			}
-			buf[i] = *format;
-			// ft_putchar(*format++);
-			i++;
-			format++;
-		}
+			buf_handler(buf, *format++, &i, 0);
 		else
 		{
-			write(1, buf, i);
-			i = 0;
+			buf_handler(buf, *format, &i, 1);
 			format++;
 			if (!(res_str = get_result_str(&format, args, &tmp_len, full_len)))
 				return (-1);
@@ -129,6 +139,7 @@ int				ft_printf(const char *format, ...)
 		}
 		full_len++;
 	}
+	buf_handler(buf, *format, &i, 1);
 	va_end(args);
 	return (full_len);
 }

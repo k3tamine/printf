@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/08/17 14:25:55 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 18:57:50 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int		main(int ac, char **av)
 	int test6;
 	int test7;
 	int test_simple_mix;
+	// char tamere[10000000] = {0};
 
+	// printf("\n\n\n\n========= TEST DEBUT =========\n\n");
 
-	printf("\n\n\n\n========= TEST DEBUT =========\n\n");
+	// char* l = setlocale(LC_ALL, ""); 
 
-	char* l = setlocale(LC_ALL, ""); 
-
-	if (l == NULL)
-    	printf("Locale not set\n");
-	else
-    	printf("Locale set to %s\n", l);
+	// if (l == NULL)
+    // 	printf("Locale not set\n");
+	// else
+    // 	printf("Locale set to %s\n", l);
 
 	// printf("ret = %D\n\n", printf("test %p\n", &ret));
 	// printf("ret = %D\n\n", ft_printf("{%15ZPK}", 123));
@@ -48,9 +48,13 @@ int		main(int ac, char **av)
 	// printf("ret = %d\n\n", ft_printf("{%lc} toto\n", L'ሴ'));
 	// printf("ret = %d\n\n", printf("{%lc}\n", 55296));
 	// printf("ret = %d\n\n", ft_printf("{%lc}\n", 55296));
-	printf("ret = %d\n\n", printf("Simple chaine\n"));
-	printf("ret = %d\n\n", ft_printf("Simple chaine\n"));
-	
+	printf("ret = %d\n\n", printf("{%*c}", -15, 0));
+	printf("ret = %d\n\n", ft_printf("{%*c}", -15, 0));
+	// printf("{%*c}", -15, 0);
+	// ft_printf("{%*c}", -15, 0);
+	// printf("{%-15c}", 0);
+	// ft_printf("{%-15d}", 0);
+	// printf("{%d, %d, %d}\n", 0, 0, 0);
 	// printf("\n\n========= TEST END =========\n\n");
 
 	// printf("long_min = %ld\n", LONG_MIN);

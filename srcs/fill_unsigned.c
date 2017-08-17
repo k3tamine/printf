@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:24:59 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 17:32:36 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:07:20 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void		fill_unsigned(char **res_str, int *size, t_format frmt)
 		apply_zero_cases(res_str, size, &frmt);
 	if (frmt.flags.sharp)
 		apply_sharp_flag(res_str, size, frmt.specifier);
-	if (frmt.width > *size && frmt.flags.minus == 0)
+	if (frmt.width > *size && !frmt.flags.minus)
 		apply_width_nominus(res_str, size, frmt);
-	if (frmt.width > *size && frmt.flags.minus == 1)
+	if (frmt.width > *size && frmt.flags.minus)
 		apply_width_minus(res_str, size, frmt.width);
 	if (frmt.specifier == 'X')
 		ft_strupper(*res_str);

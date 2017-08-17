@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 14:46:20 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:05:47 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static const t_conv g_conv[] = {
 	{ "oOxXuUp", fill_unsigned },
 	{ "dDi", fill_signed},
-	// { "cCsS%", fill_characters}
 	{ "cCsS", fill_characters}
 };
 
@@ -42,34 +41,17 @@ static void		apply_width(char **data, int *size, t_format frmt)
 	}
 }
 
-// static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
-// {
-// 	if (check_is(frmt.specifier) == IS_UNSIGNED)
-// 		fill_unsigned(res_str, tmp_len, frmt);
-// 	else if (check_is(frmt.specifier) == IS_SIGNED)
-// 		fill_signed(res_str, tmp_len, frmt);
-// 	else if (check_is(frmt.specifier) == IS_CHARACTERS)
-// 		fill_characters(res_str, tmp_len, frmt);
-// 	else
-// 	{
-// 		if (frmt.width > 0)
-// 			apply_width(res_str, tmp_len, frmt);
-// 	}
-// }
-
 static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
 {
 	int	i;
 
 	i = -1;
-	// printf("specifier = %c\n", frmt.specifier);
 	while (++i < 3)
 	{
 		if (ft_strchr(g_conv[i].specifier, frmt.specifier))
 		{
-			// printf("i = %d\n", i);
 			g_conv[i].fill_str(res_str, tmp_len, frmt);
-			break;
+			break ;
 		}
 	}
 	if (i == 3 && frmt.width > 0)
@@ -92,54 +74,48 @@ static char		*get_result_str(const char **format,
 
 static void		buf_handler(char *buf, char c, int *i, int print)
 {
-	if (*i > 4094)
-	{
-		write(1, buf, *i);
-		*i = 0;
-		buf[*i] = c;
-		*i = *i + 1;
-	}
-	if (!print)
+	if (!print && *i < B_SIZE && c != '\n')
 	{
 		buf[*i] = c;
-		*i = *i + 1;
+		(*i)++;
 	}
 	else
 	{
 		write(1, buf, *i);
 		*i = 0;
+		if (!print)
+		{
+			buf[*i] = c;
+			(*i)++;
+		}
 	}
 }
 
 int				ft_printf(const char *format, ...)
 {
 	char		*res_str;
-	char		buf[4096];
-	int			full_len;
-	int			tmp_len;
-	int			i;
+	t_norme		n;
 	va_list		args;
 
-	i = 0;
-	full_len = 0;
+	n.i = 0;
+	n.f_len = 0;
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format != '%')
-			buf_handler(buf, *format++, &i, 0);
+			buf_handler(n.buf, *format++, &(n.i), 0);
 		else
 		{
-			buf_handler(buf, *format, &i, 1);
-			format++;
-			if (!(res_str = get_result_str(&format, args, &tmp_len, full_len)))
+			buf_handler(n.buf, *format++, &(n.i), 1);
+			if (!(res_str = get_result_str(&format, args, &(n.t_len), n.f_len)))
 				return (-1);
-			write(1, res_str, tmp_len);
-			full_len += tmp_len - 1;
+			write(1, res_str, n.t_len);
+			n.f_len += n.t_len - 1;
 			free(res_str);
 		}
-		full_len++;
+		(n.f_len)++;
 	}
-	buf_handler(buf, *format, &i, 1);
+	buf_handler(n.buf, *format, &(n.i), 1);
 	va_end(args);
-	return (full_len);
+	return (n.f_len);
 }

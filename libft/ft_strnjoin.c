@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 01:47:34 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 18:58:42 by mgonon           ###   ########.fr       */
+/*   Created: 2017/08/17 18:59:22 by mgonon            #+#    #+#             */
+/*   Updated: 2017/08/17 19:00:42 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 {
 	char	*ret_str;
 	size_t	len;
@@ -27,7 +27,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s1[i])
+	while (s1[i] || i < n)
 		ret_str[j++] = s1[i++];
 	i = 0;
 	while (s2[i])

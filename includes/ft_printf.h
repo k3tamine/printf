@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 17:33:26 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 17:00:10 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define IS_UNSIGNED 3
 # define IS_SIGNED 4
 # define IS_CHARACTERS 5
+# define B_SIZE	4096
 # include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -58,6 +59,14 @@ typedef struct		s_conv
 	void		(*fill_str)(char **, int *, t_format);
 }					t_conv;
 
+typedef struct		s_norme
+{
+	char		buf[B_SIZE];
+	int			i;
+	int			f_len;
+	int			t_len;
+}					t_norme;
+
 int		ft_printf(const char *format, ...);
 void	fill_format(char const **format, t_format *frmt, va_list args);
 int		check_is(char c);
@@ -72,7 +81,6 @@ void	fill_unsigned(char **res_str, int *tmp_len, t_format frmt);
 void	fill_signed(char **res_str, int *tmp_len, t_format frmt);
 void	fill_characters(char **res_str, int *tmp_len, t_format frmt);
 void	apply_width_minus(char **data, int *size, int width);
-//TODEL
 char	*get_unicode_char(wint_t unicode_c);
 
 #endif

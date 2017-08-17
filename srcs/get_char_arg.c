@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 03:31:27 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 17:32:43 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 17:00:52 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ char		*get_char_arg(va_list args, t_format frmt, int *tmp_len)
 {
 	char	*res_str;
 
-	if (frmt.specifier == 'C' || (frmt.specifier == 'c' && frmt.length.l == 1))
+	if (frmt.specifier == 'C' || (frmt.specifier == 'c' && frmt.length.l))
 		res_str = get_arg_lc(args, tmp_len);
-	else if (frmt.specifier == 'S' || (frmt.specifier == 's' && frmt.length.l == 1))
+	else if (frmt.specifier == 'S' || (frmt.specifier == 's' && frmt.length.l))
 		res_str = get_arg_ls(args, tmp_len);
 	else if (frmt.specifier == 'c')
 		res_str = get_arg_c(args, tmp_len);

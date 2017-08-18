@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 17:32:32 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:10:15 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,4 @@ void		fill_format(char const **format, t_format *frmt, va_list args)
 	}
 	else
 		frmt->specifier = '\0';
-	// if (frmt->precision > 0 && frmt->flags.zero)
-	// 	frmt->flags.zero = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/08/17 18:57:50 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 20:31:38 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int		main(int ac, char **av)
 	// printf("ret = %d\n\n", ft_printf("{%lc} toto\n", L'ሴ'));
 	// printf("ret = %d\n\n", printf("{%lc}\n", 55296));
 	// printf("ret = %d\n\n", ft_printf("{%lc}\n", 55296));
-	printf("ret = %d\n\n", printf("{%*c}", -15, 0));
-	printf("ret = %d\n\n", ft_printf("{%*c}", -15, 0));
+	// printf("ret = %d\n\n", printf("{%*c}", -15, 0));
+	// printf("ret = %d\n\n", ft_printf("{%*c}", -15, 0));
+	// JE VEUX AFFICHER UNE CHAINE DE CHARACTERE
+	printf("ret = %d\n\n", ft_printf("SALUT %o\n", 100));
 	// printf("{%*c}", -15, 0);
 	// ft_printf("{%*c}", -15, 0);
 	// printf("{%-15c}", 0);

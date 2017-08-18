@@ -6,11 +6,19 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 17:13:58 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 16:16:23 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:17:29 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+static void	fill_4bits_unicode(wint_t unicode, char *encoding)
+{
+	encoding[0] = ((unicode >> 18) | 0xF0);
+	encoding[1] = (((unicode >> 12) & 0x3F) | 0x80);
+	encoding[2] = (((unicode >> 6) & 0x3F) | 0x80);
+	encoding[3] = ((unicode & 0x3F) | 0x80);
+}
 
 char		*get_unicode_char(wint_t unicode)
 {
@@ -33,12 +41,7 @@ char		*get_unicode_char(wint_t unicode)
 		encoding[2] = ((unicode & 0x3F) | 0x80);
 	}
 	else if (unicode >= 0x10000 && unicode <= 0x10FFFF)
-	{
-		encoding[0] = ((unicode >> 18) | 0xF0);
-		encoding[1] = (((unicode >> 12) & 0x3F) | 0x80);
-		encoding[2] = (((unicode >> 6) & 0x3F) | 0x80);
-		encoding[3] = ((unicode & 0x3F) | 0x80);
-	}
+		fill_4bits_unicode(unicode, encoding);
 	else
 		return (NULL);
 	return (encoding);

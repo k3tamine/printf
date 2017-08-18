@@ -6,23 +6,11 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:24:59 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 19:07:20 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:12:47 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-static void	ft_strupper(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		str[i] = ft_toupper(str[i]);
-		i++;
-	}
-}
 
 static void	apply_zero_cases(char **res_str, int *size, t_format *frmt)
 {

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 03:31:27 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 17:00:52 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/18 14:27:26 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static char	*get_arg_c(va_list args, int *tmp_len)
 	char	*res_str;
 
 	arg = (char)va_arg(args, int);
-	// res_str = ft_strndup(&arg, 1);
 	res_str = ft_strnew_c(1, arg);
 	*tmp_len = 1;
 	return (res_str);
@@ -44,7 +43,7 @@ static char	*get_arg_lc(va_list args, int *tmp_len)
 	char	*res_str;
 
 	arg = (wint_t)va_arg(args, wint_t);
-	if ((res_str = get_unicode_char(arg)) == NULL)
+	if (!(res_str = get_unicode_char(arg)))
 		return (NULL);
 	if ((*tmp_len = ft_strlen(res_str)) == 0)
 		*tmp_len = 1;
@@ -59,7 +58,7 @@ static char	*get_arg_ls(va_list args, int *tmp_len)
 	arg = (wchar_t*)va_arg(args, wchar_t*);
 	if (arg != NULL)
 	{
-		if ((res_str = get_unicode_str(arg)) == NULL)
+		if (!(res_str = get_unicode_str(arg)))
 			return (NULL);
 	}
 	else

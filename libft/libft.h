@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 23:57:45 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 19:03:14 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:12:15 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char			*ft_strnew(size_t size);
 char			*ft_strnew_c(size_t size, char c);
 void			ft_strdel(char **as);
 void			ft_strclr(char *s);
+void			ft_strupper(char *str);
 void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			*ft_strmap(char const *s, char (*f)(char));

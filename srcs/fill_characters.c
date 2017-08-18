@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 19:05:45 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/17 19:09:43 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	octets_to_print(char *str)
 	char	octet;
 
 	octet = *str;
-	// printf("LA octet = %c\n", octet);
 	if ((octet & 128) == 0)
 		return (1);
 	if ((octet & 224) == 192)
@@ -55,7 +54,7 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 	}
 }
 
-static void		apply_width(char **data, int *size, t_format frmt)
+static void	apply_width(char **data, int *size, t_format frmt)
 {
 	int		width;
 	char	*to_add;

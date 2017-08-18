@@ -6,7 +6,7 @@
 #    By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 23:59:50 by mgonon            #+#    #+#              #
-#    Updated: 2017/08/17 19:03:25 by mgonon           ###   ########.fr        #
+#    Updated: 2017/08/17 19:12:39 by mgonon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC = ft_isalpha.c \
 	  ft_strequ.c \
 	  ft_strnequ.c \
 	  ft_strsub.c \
+	  ft_strupper.c \
 	  ft_strjoin.c \
 	  ft_strnjoin.c \
 	  ft_strtrim.c \

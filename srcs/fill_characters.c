@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 19:09:43 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/21 20:33:46 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,25 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 
 static void	apply_width(char **data, int *size, t_format frmt)
 {
-	int		width;
 	char	*to_add;
 
-	width = frmt.width;
-	if (width > *size)
+	if (frmt.width > *size)
 	{
 		if (!frmt.flags.zero || frmt.flags.minus)
-			to_add = ft_strnew_c(width - *size, ' ');
+			to_add = ft_strnew_c(frmt.width - *size, ' ');
 		else
-			to_add = ft_strnew_c(width - *size, '0');
+			to_add = ft_strnew_c(frmt.width - *size, '0');
 		if (to_add == NULL)
 			return ;
-		if (!frmt.flags.minus)
+		if (!frmt.flags.minus && frmt.specifier == 'c')
 			*data = ft_strnjoin(to_add, *data, 1);
-		else
+		else if (!frmt.flags.minus)
+			*data = ft_strjoin(to_add, *data);
+		else if (frmt.specifier == 'c')
 			*data = ft_strnjoin(*data, to_add, 1);
-		*size = width;
+		else
+			*data = ft_strjoin(*data, to_add);
+		*size = frmt.width;
 		free(to_add);
 	}
 }

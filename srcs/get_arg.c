@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 01:51:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/21 20:14:24 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/23 22:50:32 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static intmax_t		get_signed_arg(va_list args,
 	intmax_t arg;
 
 	if (length.l >= 2)
-		arg = (intmax_t)va_arg(args, long long);
+		arg = va_arg(args, long long);
 	else if (length.l == 1 || specifier == 'D')
-		arg = (intmax_t)va_arg(args, long);
+		arg = va_arg(args, long);
 	else if (length.z >= 1)
 		arg = va_arg(args, ssize_t);
 	else if (length.j >= 1)
 		arg = va_arg(args, long long);
 	else if (length.h >= 2)
-		arg = (intmax_t)(char)va_arg(args, int);
+		arg = (char)va_arg(args, int);
 	else if (length.h == 1)
-		arg = (intmax_t)(short)va_arg(args, int);
+		arg = (short)va_arg(args, int);
 	else
-		arg = (intmax_t)va_arg(args, int);
+		arg = va_arg(args, int);
 	return (arg);
 }
 
@@ -40,20 +40,19 @@ static uintmax_t	get_unsigned_arg(va_list args,
 	uintmax_t arg;
 
 	if (length.l >= 2)
-		arg = (uintmax_t)va_arg(args, unsigned long long);
-	else if (length.l == 1 || specifier == 'U' ||
-			specifier == 'O' || specifier == 'B')
-		arg = (uintmax_t)va_arg(args, unsigned long);
+		arg = va_arg(args, unsigned long long);
+	else if (length.l == 1 || specifier == 'U' || specifier == 'O' || specifier == 'B')
+		arg = va_arg(args, unsigned long);
 	else if (length.z >= 1)
-		arg = (uintmax_t)va_arg(args, size_t);
+		arg = va_arg(args, size_t);
 	else if (length.j >= 1)
 		arg = va_arg(args, unsigned long long);
 	else if (length.h >= 2)
-		arg = (uintmax_t)(unsigned char)va_arg(args, unsigned int);
+		arg = (unsigned char)va_arg(args, unsigned int);
 	else if (length.h == 1)
-		arg = (uintmax_t)(unsigned short)va_arg(args, unsigned int);
+		arg = (unsigned short)va_arg(args, unsigned int);
 	else
-		arg = (uintmax_t)va_arg(args, unsigned int);
+		arg = va_arg(args, unsigned int);
 	return (arg);
 }
 

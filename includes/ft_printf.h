@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/21 20:47:16 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 00:25:14 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				ft_printf(const char *format, ...);
 void			fill_format(char const **format, t_format *frmt, va_list args);
 int				check_is(char c);
 int				get_base(char specifier);
-void			init_format(t_format *frmt);
 char			*get_str_arg(va_list args, t_format frmt, int *tmp_len);
 char			*intmaxtoa_base(intmax_t value, int base);
 char			*uintmaxtoa_base(uintmax_t value, int base);

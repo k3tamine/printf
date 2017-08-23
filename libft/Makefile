@@ -6,11 +6,13 @@
 #    By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 23:59:50 by mgonon            #+#    #+#              #
-#    Updated: 2017/08/18 15:12:40 by mgonon           ###   ########.fr        #
+#    Updated: 2017/08/24 01:21:08 by mgonon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+FLAGS = -Werror -Wall -Wextra
 
 SRC = ft_isalpha.c \
 	  ft_putchar.c \
@@ -81,15 +83,19 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
+%.o: %.c libft.h
+	@echo "\033[1A\033[K\033[33;32mCompiling [$@]"
+	@gcc $(FLAGS) -o $@ -c $<
+
 $(NAME): $(OBJ)
-	gcc -c -Werror -Wall -Wextra $(SRC)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@echo "\033[33;32mCreating libft.a"
+	@ar rc $(NAME) $(OBJ); ranlib $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@echo "\033[33;31mDeleting .o"
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\033[33;31mDeleting libft.a"
 
 re: fclean all

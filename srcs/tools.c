@@ -6,27 +6,11 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 04:11:46 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/16 17:32:48 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 00:59:38 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-void	init_format(t_format *frmt)
-{
-	frmt->flags.minus = 0;
-	frmt->flags.plus = 0;
-	frmt->flags.space = 0;
-	frmt->flags.sharp = 0;
-	frmt->flags.zero = 0;
-	frmt->width = 0;
-	frmt->precision = -1;
-	frmt->length.h = 0;
-	frmt->length.l = 0;
-	frmt->length.j = 0;
-	frmt->length.z = 0;
-	frmt->specifier = 0;
-}
 
 int		check_is(char c)
 {
@@ -35,7 +19,7 @@ int		check_is(char c)
 	else if (c == 'l' || c == 'h' || c == 'j' || c == 'z')
 		return (IS_LENGTH);
 	else if (c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-			c == 'u' || c == 'U' || c == 'p')
+			c == 'u' || c == 'U' || c == 'p'|| c == 'b' || c == 'B')
 		return (IS_UNSIGNED);
 	else if (c == 'd' || c == 'D' || c == 'i')
 		return (IS_SIGNED);

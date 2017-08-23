@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:26:17 by sspinazz          #+#    #+#             */
-/*   Updated: 2017/08/21 20:21:25 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/23 22:54:17 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int		main(int ac, char **av)
 	// printf("ret = %D\n\n", printf("{%15ZPK}", 123));
 	// printf("ret = %d\n\n", printf("{%lc} toto\n", L'ሴ'));
 	// printf("ret = %d\n\n", ft_printf("{%lc} toto\n", L'ሴ'));
-	// printf("ret = %d\n\n", printf("{%lc}\n", 55296));
-	// printf("ret = %d\n\n", ft_printf("{%lc}\n", 55296));
+	printf("ret = %d\n\n", printf("{%b}\n", 16));
+	printf("ret = %d\n\n", ft_printf("{%b}\n", 16746));
 	// printf("ret = %d\n\n", printf("{%*c}", -15, 0));
 	// printf("ret = %d\n\n", ft_printf("{%*c}", -15, 0));
 	// JE VEUX AFFICHER UNE CHAINE DE CHARACTERE
-	printf("ret = %d\n\n", printf("%-10s is a string\n", "\0"));
-	printf("ret = %d\n\n", ft_printf("%-10s is a string\n", "\0"));
+	// printf("ret = %d\n\n", printf("%-10s is a string\n", "\0"));
+	// printf("ret = %d\n\n", ft_printf("%-10s is a string\n", "\0"));
 	// printf("{%*c}", -15, 0);
 	// ft_printf("{%*c}", -15, 0);
 	// printf("{%-15c}", 0);

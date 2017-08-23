@@ -6,14 +6,14 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/20 18:57:14 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 00:25:19 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
 static const t_conv g_conv[] = {
-	{ "oOxXuUp", fill_unsigned },
+	{ "oOxXuUpbB", fill_unsigned },
 	{ "dDi", fill_signed},
 	{ "cCsS", fill_characters}
 };
@@ -58,13 +58,13 @@ static void		fill_str_res(char **res_str, int *tmp_len, t_format frmt)
 		apply_width(res_str, tmp_len, frmt);
 }
 
-static char		*get_result_str(const char **format,
-								va_list args, int *tmp_len, int full_len)
+static char		*get_result_str(const char **format, va_list args, int *tmp_len)
 {
 	t_format	frmt;
 	char		*res_str;
 
-	init_format(&frmt);
+	ft_bzero(&frmt, sizeof(frmt));
+	frmt.precision = -1;
 	fill_format(format, &frmt, args);
 	res_str = get_str_arg(args, frmt, tmp_len);
 	if (res_str)
@@ -107,7 +107,7 @@ int				ft_printf(const char *format, ...)
 		else
 		{
 			buf_handler(n.buf, *format++, &(n.i), 1);
-			if (!(res_str = get_result_str(&format, args, &(n.t_len), n.f_len)))
+			if (!(res_str = get_result_str(&format, args, &(n.t_len))))
 				return (-1);
 			write(1, res_str, n.t_len);
 			n.f_len += n.t_len - 1;

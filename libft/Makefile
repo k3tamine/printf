@@ -6,7 +6,7 @@
 #    By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 23:59:50 by mgonon            #+#    #+#              #
-#    Updated: 2017/08/24 01:21:08 by mgonon           ###   ########.fr        #
+#    Updated: 2017/08/24 02:02:05 by mgonon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,9 @@ clean:
 	@rm -f $(OBJ)
 
 fclean: clean
+	@rm -f libft.a
 	@echo "\033[33;31mDeleting libft.a"
 
 re: fclean all
+
+.PHONY: re clean fclean all

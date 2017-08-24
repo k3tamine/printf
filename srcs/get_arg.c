@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 01:51:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/23 22:50:32 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 02:27:50 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static intmax_t		get_signed_arg(va_list args,
 {
 	intmax_t arg;
 
-	if (length.l >= 2)
-		arg = va_arg(args, long long);
-	else if (length.l == 1 || specifier == 'D')
+	if (length.l == 1 || specifier == 'D')
 		arg = va_arg(args, long);
-	else if (length.z >= 1)
-		arg = va_arg(args, ssize_t);
-	else if (length.j >= 1)
+	else if (length.l == 2)
 		arg = va_arg(args, long long);
-	else if (length.h >= 2)
-		arg = (char)va_arg(args, int);
 	else if (length.h == 1)
 		arg = (short)va_arg(args, int);
+	else if (length.h == 2)
+		arg = (char)va_arg(args, int);
+	else if (length.z == 1)
+		arg = va_arg(args, ssize_t);
+	else if (length.j == 1)
+		arg = va_arg(args, long long);
 	else
 		arg = va_arg(args, int);
 	return (arg);
@@ -39,18 +39,19 @@ static uintmax_t	get_unsigned_arg(va_list args,
 {
 	uintmax_t arg;
 
-	if (length.l >= 2)
-		arg = va_arg(args, unsigned long long);
-	else if (length.l == 1 || specifier == 'U' || specifier == 'O' || specifier == 'B')
+	if (length.l == 1 || specifier == 'U' ||
+		specifier == 'O' || specifier == 'B')
 		arg = va_arg(args, unsigned long);
-	else if (length.z >= 1)
-		arg = va_arg(args, size_t);
-	else if (length.j >= 1)
+	else if (length.l == 2)
 		arg = va_arg(args, unsigned long long);
-	else if (length.h >= 2)
+	else if (length.h == 2)
 		arg = (unsigned char)va_arg(args, unsigned int);
 	else if (length.h == 1)
 		arg = (unsigned short)va_arg(args, unsigned int);
+	else if (length.z == 1)
+		arg = va_arg(args, size_t);
+	else if (length.j == 1)
+		arg = va_arg(args, unsigned long long);
 	else
 		arg = va_arg(args, unsigned int);
 	return (arg);

@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 03:31:27 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/24 02:25:10 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 02:41:59 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static char	*get_arg_lc(va_list args, int *tmp_len)
 	arg = va_arg(args, wint_t);
 	if (!(res_str = get_unicode_char(arg)))
 		return (NULL);
-	if ((*tmp_len = ft_strlen(res_str)) == 0)
-		*tmp_len = 1;
+	*tmp_len = ft_strlen(res_str);
+	if (*tmp_len == 0)
+		(*tmp_len)++;
 	return (res_str);
 }
 

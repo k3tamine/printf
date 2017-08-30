@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 12:47:48 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/24 02:17:56 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 02:58:35 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static const t_conv g_conv[] = {
 	{ "cCsS", fill_characters}
 };
 
-static void		apply_width(char **data, int *size, t_format frmt)
+static void		apply_width(char **str, int *size, t_format frmt)
 {
 	int		width;
 	char	*to_add;
@@ -33,9 +33,9 @@ static void		apply_width(char **data, int *size, t_format frmt)
 		if (to_add == NULL)
 			return ;
 		if (!frmt.flags.minus)
-			*data = ft_strjoin(to_add, *data);
+			*str = ft_strjoin(to_add, *str);
 		else
-			*data = ft_strjoin(*data, to_add);
+			*str = ft_strjoin(*str, to_add);
 		*size = width;
 		free(to_add);
 	}

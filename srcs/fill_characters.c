@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/21 20:33:46 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/24 02:57:45 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	octets_to_print(char *str)
 	return (0);
 }
 
-static void	apply_precision(char **data, int *size, t_format frmt)
+static void	apply_precision(char **str, int *size, t_format frmt)
 {
 	int	to_print;
 	int	i;
@@ -42,19 +42,19 @@ static void	apply_precision(char **data, int *size, t_format frmt)
 		while (to_print + i <= frmt.precision)
 		{
 			to_print += i;
-			i = octets_to_print(*data + to_print);
+			i = octets_to_print(*str + to_print);
 		}
-		(*data)[to_print] = '\0';
+		(*str)[to_print] = '\0';
 		*size = to_print;
 	}
 	else
 	{
-		(*data)[frmt.precision] = '\0';
+		(*str)[frmt.precision] = '\0';
 		*size = frmt.precision;
 	}
 }
 
-static void	apply_width(char **data, int *size, t_format frmt)
+static void	apply_width(char **str, int *size, t_format frmt)
 {
 	char	*to_add;
 
@@ -67,23 +67,23 @@ static void	apply_width(char **data, int *size, t_format frmt)
 		if (to_add == NULL)
 			return ;
 		if (!frmt.flags.minus && frmt.specifier == 'c')
-			*data = ft_strnjoin(to_add, *data, 1);
+			*str = ft_strnjoin(to_add, *str, 1);
 		else if (!frmt.flags.minus)
-			*data = ft_strjoin(to_add, *data);
+			*str = ft_strjoin(to_add, *str);
 		else if (frmt.specifier == 'c')
-			*data = ft_strnjoin(*data, to_add, 1);
+			*str = ft_strnjoin(*str, to_add, 1);
 		else
-			*data = ft_strjoin(*data, to_add);
+			*str = ft_strjoin(*str, to_add);
 		*size = frmt.width;
 		free(to_add);
 	}
 }
 
-void		fill_characters(char **data, int *size,
+void		fill_characters(char **str, int *size,
 							t_format frmt)
 {
 	if (frmt.precision > -1 && frmt.precision < *size)
-		apply_precision(data, size, frmt);
+		apply_precision(str, size, frmt);
 	if (frmt.width > 0)
-		apply_width(data, size, frmt);
+		apply_width(str, size, frmt);
 }

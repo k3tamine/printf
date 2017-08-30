@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 05:34:57 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/24 02:57:45 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/30 05:51:08 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static void	apply_width(char **str, int *size, t_format frmt)
 		if (to_add == NULL)
 			return ;
 		if (!frmt.flags.minus && frmt.specifier == 'c')
-			*str = ft_strnjoin(to_add, *str, 1);
+			*str = ft_strnjoin_free(to_add, *str, 1, 2);
 		else if (!frmt.flags.minus)
-			*str = ft_strjoin(to_add, *str);
+			*str = ft_strjoin_free(to_add, *str, 2);
 		else if (frmt.specifier == 'c')
-			*str = ft_strnjoin(*str, to_add, 1);
+			*str = ft_strnjoin_free(*str, to_add, 1, 1);
 		else
-			*str = ft_strjoin(*str, to_add);
+			*str = ft_strjoin_free(*str, to_add, 1);
 		*size = frmt.width;
 		free(to_add);
 	}

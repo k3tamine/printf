@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 17:13:58 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/24 02:15:41 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/30 04:55:03 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*get_unicode_str(wchar_t *unicode_str)
 	{
 		if (!(to_add = get_unicode_char((wint_t)(*unicode_str))))
 			return (NULL);
-		res_str = ft_strjoin(res_str, to_add);
+		res_str = ft_strjoin_free(res_str, to_add, 1);
 		free(to_add);
 		unicode_str++;
 	}

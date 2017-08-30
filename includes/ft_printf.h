@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 00:44:49 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/24 02:18:41 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/30 05:04:06 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char			*get_char_arg(va_list args, t_format frmt, int *tmp_len);
 void			fill_unsigned(char **res_str, int *tmp_len, t_format frmt);
 void			fill_signed(char **res_str, int *tmp_len, t_format frmt);
 void			fill_characters(char **res_str, int *tmp_len, t_format frmt);
-void			apply_width_minus(char **data, int *size, int width);
+void			apply_width_minus(char **str, int *size, int width);
 char			*get_unicode_char(wint_t unicode_c);
 
 #endif

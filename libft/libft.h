@@ -6,7 +6,7 @@
 /*   By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 23:57:45 by mgonon            #+#    #+#             */
-/*   Updated: 2017/08/17 19:12:15 by mgonon           ###   ########.fr       */
+/*   Updated: 2017/08/30 05:49:25 by mgonon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_free(char *s1, char *s2, int to_free);
+char			*ft_strnjoin_free(char *s1, char *s2, size_t n, int to_free);
 char			*ft_strnjoin(char const *s1, char const *s2, size_t n);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *str, char c);

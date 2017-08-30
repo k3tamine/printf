@@ -6,7 +6,7 @@
 #    By: mgonon <mgonon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/28 05:43:21 by mgonon            #+#    #+#              #
-#    Updated: 2017/08/24 17:39:41 by mgonon           ###   ########.fr        #
+#    Updated: 2017/08/30 05:29:46 by mgonon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,11 @@ all: $(NAME)
 	@echo "\033[1A\033[K\033[33;32mCompiling [$@]"
 	@gcc $(FLAGS) -o $@ -c $<
 
-$(NAME): $(OBJS)
+libft:
+	make -C libft
+
+$(NAME): $(OBJS) libft
 	@echo ""
-	@make -C libft/
 	@cp libft/libft.a ./$(NAME)
 	@echo "\033[33;32mCreating $(NAME)"
 	@ar rc $(NAME) $(OBJS)
@@ -58,4 +60,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: re clean fclean all
+.PHONY: re clean fclean all libft
